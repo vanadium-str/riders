@@ -7,12 +7,12 @@ function Header({name, back}) {
     const {setPage, setPass, setPassRepeat, setEmail} = useContext(ridersAppContext);
 
     return (
-        <div className='row d-flex align-items-center px-3'>
+        <div className='row d-flex align-items-center px-4'>
             <div className='col-6 logo'>
                 Rideapp
             </div>
             <div className='col-6 text-end mediumTitle'>
-                {name} {back ? <img src={arrow} onClick={() => {
+                {name} {back ? <img src={arrow} className='cursor' onClick={() => {
                         setEmail('');
                         setPass('');
                         setPassRepeat('');

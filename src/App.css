@@ -107,6 +107,10 @@ body{
     height: 54px;
     margin-top: 1rem;
 }
+.inputSize{
+    width: 304px;
+    height: 54px;
+}
 .heightInput{
     min-height: 84px;
 }
@@ -158,4 +162,7 @@ body{
 }
 .passwordView.view {
 	background: url(./images/no-view.svg) 0 0 no-repeat;
+}
+.ltr{
+    direction: ltr;
 }

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { week } from '../../utils/constants';
+import { months, week } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import EventElement from './EventElement';
 import HeaderEvent from './HeaderEvent';
@@ -25,8 +25,8 @@ function AllEvents() {
         <div className='container py-3'>
             <div className='row-reverse'>
                 <HeaderEvent name={'הקפצות'}/>
-                <div className='col-2 offset-10 rtl mt-4'>
-                    15 {week[0]}'
+                <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
+                    15/07 {week[0]}'
                 </div>
                 <div className='col-12'>
                     <EventElement/>
@@ -35,8 +35,8 @@ function AllEvents() {
                     <EventElement/>
                 </div>
 
-                <div className='col-2 offset-10 rtl mt-4'>
-                    16 {week[1]}'
+                <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
+                    16/07 {week[1]}'
                 </div>
                 <div className='col-12'>
                     <EventElement/>

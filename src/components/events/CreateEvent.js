@@ -16,7 +16,9 @@ function CreateEvent({name, events, page}) {
             </div>
             <div className='row'>
                 <div className='col-12 d-flex justify-content-center'>
-                    <input className='inputSignIn text-end' type='datetime-local'/>
+                    <input className='inputSignIn text-end ltr' type='datetime-local' onChange={(event) => {
+                        console.log(event.target.value)
+                    }}/>
                 </div>
             </div>
         </div>

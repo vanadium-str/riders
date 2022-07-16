@@ -10,7 +10,7 @@ function SocialMedia() {
 
     return (
         <div className='row'>
-            <div className='col-12 text-end px-4 fw-bold mt-5 mb-3'>
+            <div className='col-12 text-end px-4 fw-bold mt-3 mb-3'>
                 כניסה דרך
             </div>
             <div className='d-flex justify-content-center'>

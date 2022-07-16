@@ -35,7 +35,7 @@ function StartPage() {
                 <Button name={'כניסה'} login={true} page={events} callbackWrongMessage={callbackWrongMessage}/>
             </div>
             <SocialMedia/>
-            <div className='text-end colorBlue cursor mt-5 pe-3' onClick={() => {
+            <div className='text-end colorBlue cursor mt-4 pe-3' onClick={() => {
                 setPass('');
                 setPage(registration);
             }}>

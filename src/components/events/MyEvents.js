@@ -11,9 +11,9 @@ function MyEvents() {
     return (
         <div className='container py-3'>
             <div className='row'>
-                <HeaderEvent name={'יצר טיולים'}/>
+                <HeaderEvent name={'הקפצות שפתחתי'}/>
                 <div className='col-12 text-end'>
-                    No events
+                    לא נמצאים הקפצות
                 </div>
                 <div className='buttonBottom'>
                     <ButtonEvents name={'+'} events={true} page={createEvent}/>
