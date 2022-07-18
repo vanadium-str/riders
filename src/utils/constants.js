@@ -2,9 +2,27 @@ export const events = 'events';
 export const registration = 'registration';
 export const myEvents = 'myEvents';
 export const createEvent = 'createEvent';
-export const week = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'שבת'];
+export const aboutEvent = 'aboutEvent';
 export const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט',
         'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+
+export function dateFormatting(date, item){
+        let dateFormat = new Date(item.time_start);
+        date.push(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}`)
+}
+
+export function dateTorender(date){
+        const week = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'שבת'];
+        let array = date.split('/');
+        let dateFormat = new Date(array[2], array[1].toString() - 1, array[0]);
+        let day = week[dateFormat.getDay()];
+        return `${array[0]}/${array[1]} ${day}'`;
+}
+
+export function timeToRender(date){
+        let dateFormat = new Date(date);
+        return `${dateFormat.getHours()}:${dateFormat.getMinutes()}`;
+}
 
 // export function swap(items, firstIndex, secondIndex){
 //     const temp = items[firstIndex];

@@ -1,30 +1,38 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import { TbCaravan } from "react-icons/tb";
+import { aboutEvent, timeToRender } from '../../utils/constants';
 import { ridersAppContext } from "../../utils/context";
 import NumberOfSeats from '../eventsComponents/NumberOfSeats';
 import PlaceAndTime from '../eventsComponents/PlaceAndTime';
 
-function EventElement() {
+function EventElement({event}) {
 
-    const {eventsList} = useContext(ridersAppContext);
+    const {setPageEvent} = useContext(ridersAppContext);
+    
+    const vacancy = event.max_participants - event.booked;
 
     return(
-        <div className='container backgroundElement my-1 p-2'>
+        <div className='container backgroundElement my-1 p-2 cursor' onClick={() => {
+            setPageEvent(aboutEvent);
+        }}>
             <div className='row text-end d-flex align-items-end'>
-                <div className='col-2'>
-                    <NumberOfSeats number={15} name={'מתוך'} big={false}/>
+                <div className={`col-2  ${vacancy < 4 ? 'colorOrange' : ''}
+                    ${vacancy === 0 ? 'colorRed' : ''}`}>
+                    <NumberOfSeats number={event.max_participants} name={'מתוך'} big={false}/>
+                </div>
+                <div className={`col-2  ${vacancy < 4 ? 'colorOrange' : ''} 
+                    ${vacancy === 0 ? 'colorRed' : ''}`}>
+                    <NumberOfSeats number={vacancy} name={'פנוי'} big={true}/>
                 </div>
                 <div className='col-2'>
-                    <NumberOfSeats number={0} name={'פנוי'} big={true}/>
-                </div>
-                <div className='col-2'>
-                    <NumberOfSeats number={15} name={'בהמתנה'} big={true}/>
+                    <NumberOfSeats number={event.waiting} name={'בהמתנה'} big={true}/>
                 </div>
                 <div className='col-6'>
-                   <PlaceAndTime place={'משמר העמק'} timeFrom={'12:00'} timeTo={'15:00'}/>
+                   <PlaceAndTime place={event.spot} timeFrom={timeToRender(event.time_start)}
+                    timeTo={timeToRender(event.time_end)} done={event.booked >= event.min_participants ? true : false}/>
                 </div>
                 <div className='col-12 colorGrey'>
-                    איתן <TbCaravan/>
+                    {event.driver} <TbCaravan/>
                 </div>
             </div>
         </div>

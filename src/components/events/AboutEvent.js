@@ -28,7 +28,7 @@ function AboutEvent() {
             </div>
             <div className='col-6'>
                 <div className='rtl mediumTitle'>
-                    15 {week[0]}'
+                    {/* 15 {week[0]}' */}
                 </div>
                 <div>
                     18:00-20:00

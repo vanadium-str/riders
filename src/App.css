@@ -40,6 +40,8 @@ body{
     color: rgb(13, 157, 13);
     font-size: 20px;
     margin-right: 3px;
+    display: flex;
+    align-items: center;
 }
 
 .eventsSwitch{
@@ -165,4 +167,10 @@ body{
 }
 .ltr{
     direction: ltr;
+}
+.colorOrange{
+    color: #F59E3A;
+}
+.colorRed{
+    color: #F5665D;
 }

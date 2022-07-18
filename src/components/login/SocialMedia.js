@@ -21,7 +21,9 @@ function SocialMedia() {
                     <img src={fb} alt='facebook'/>
                 </div>
                 <div className='col-4 socialMediaBlock cursor'>
-                    <img src={google} alt='google'/>
+                    <a href='https://riderrs.herokuapp.com/google/'>
+                        <img src={google} alt='google'/>
+                    </a>
                 </div>
             </div>
         </div>
