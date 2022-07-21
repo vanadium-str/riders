@@ -6,7 +6,7 @@ import HeaderEvent from './HeaderEvent';
 
 function AllEvents() {
 
-    const {eventsList, setEventsList} = useContext(ridersAppContext);
+    const {eventsList, setEventsList, userId} = useContext(ridersAppContext);
     const [uniqueDates, setUniqueDates] = useState([]);
     let dates = [];
 
@@ -26,10 +26,12 @@ function AllEvents() {
         );
     }, []);
 
+    console.log(userId)
+
     return (
-        <div className='container py-3'>
+        <div className='container py-3 minHeight'>
+            <HeaderEvent name={'הקפצות'} back={false}/>
             <div className='row-reverse'>
-                <HeaderEvent name={'הקפצות'}/>
 
                 {uniqueDates.map((item) => {
                     function filter (data){

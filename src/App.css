@@ -9,6 +9,17 @@ body{
 
 /* events */
 
+a:link {
+    text-decoration: none;
+    padding: 0;
+}
+/* a:hover {
+    background-color: inherit;
+}
+
+a:visited {
+    background-color: inherit;
+} */
 .pageTitle{
     font-weight: 700;
     font-size: 41px;
@@ -45,10 +56,11 @@ body{
 }
 
 .eventsSwitch{
-    position: absolute;
+    position: sticky;
     bottom: 0;
     cursor: pointer;
     font-size: 12px;
+    background-color: #F7F9FA;
 }
 .activeEventsSwitchButton{
     background: radial-gradient(50% 50% at 50% 50%, #D2FF4D 0%, #F7F9FA 73.44%);
@@ -89,6 +101,29 @@ body{
     border-radius: 16px;
     border: #FFFFFF;
 }
+.locationBlock{
+    background: #FFFFFF;
+    border-radius: 16px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.chooseTopBlock{
+    background: #FFFFFF;
+    border-radius: 16px 16px 0px 0px;
+}
+.chooseBottomBlock{
+    background: #FFFFFF;
+    border-radius: 0px 0px 16px 16px;
+}
+.backgroundBlue{
+    background: #607AA1;
+    color: #FFFFFF;
+}
 
 /* start page */
 
@@ -108,6 +143,10 @@ body{
     width: 304px;
     height: 54px;
     margin-top: 1rem;
+}
+.inputSmall{
+    width: 144px;
+    height: 54px;
 }
 .inputSize{
     width: 304px;
@@ -173,4 +212,7 @@ body{
 }
 .colorRed{
     color: #F5665D;
+}
+.minHeight{
+    min-height: 94vH;
 }

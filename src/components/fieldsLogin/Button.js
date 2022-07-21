@@ -1,9 +1,17 @@
-import React, {useContext } from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import { events } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
-function Button({name, login, page, callbackWrongMessage}) {
+function Button({name, login, callbackWrongMessage}) {
 
-    const {setPage, email, pass, passRepeat, setEventsList} = useContext(ridersAppContext);
+    const { email, pass, passRepeat, setUserId, setAdmin } = useContext(ridersAppContext);
+
+    let navigate = useNavigate();
+
+    const eventsPage = () => {
+        navigate(`/${events}`);
+    };
 
     const loginCheck = () => {
         fetch('https://riderrs.herokuapp.com/api/login', {
@@ -22,8 +30,8 @@ function Button({name, login, page, callbackWrongMessage}) {
                 if(data.status === 1 || data.status === 2){
                     callbackWrongMessage(data.status);
                 }else if(data){
-                    setEventsList(data);
-                    setPage(page);
+                    setUserId(data.user_id);
+                    eventsPage();
                 }
             })
     }
@@ -48,7 +56,9 @@ function Button({name, login, page, callbackWrongMessage}) {
                 if(data.status === 1){
                     callbackWrongMessage(data.status);
                 }else if(data){
-                    setPage(page);       
+                    setUserId(data.user_id);
+                   // setAdmin(data.is_admin);
+                    eventsPage();    
                 }
 
             })

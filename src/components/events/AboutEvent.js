@@ -3,7 +3,6 @@ import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
 import example from '../../images/example.jpg';
 import AboutEventBlock from '../eventsComponents/AboutEventBlock';
-import { week } from '../../utils/constants';
 import { TbCaravan, TbCheck } from "react-icons/tb";
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 

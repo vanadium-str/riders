@@ -1,6 +1,7 @@
 export const events = 'events';
 export const registration = 'registration';
 export const myEvents = 'myEvents';
+export const allEvents = 'allEvents';
 export const createEvent = 'createEvent';
 export const aboutEvent = 'aboutEvent';
 export const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט',
