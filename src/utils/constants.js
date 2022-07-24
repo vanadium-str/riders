@@ -22,7 +22,13 @@ export function dateTorender(date){
 
 export function timeToRender(date){
         let dateFormat = new Date(date);
-        return `${dateFormat.getHours()}:${dateFormat.getMinutes()}`;
+        let minutes;
+        if(dateFormat.getMinutes() < 10){
+                minutes = '0' + dateFormat.getMinutes();
+        }else{
+                minutes = dateFormat.getMinutes();
+        }
+        return `${dateFormat.getHours()}:${minutes}`;
 }
 
 // export function swap(items, firstIndex, secondIndex){

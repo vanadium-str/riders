@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import { ridersAppContext } from '../../utils/context';
 
 function InputEvent({type, name, content}) {
 
-    const {setDate, setDriver, setPrice} = useContext(ridersAppContext);
+    const { setDate, setDriver, setPrice } = useContext(ridersAppContext);
 
     const typeDefinition = (event) => {
         if(content === 'date'){
@@ -11,6 +11,7 @@ function InputEvent({type, name, content}) {
         }else if(content === 'driver'){
             setDriver(event);
         }else if(content === 'price'){
+            console.log(event);
             setPrice(event);
         }
     }

@@ -5,15 +5,15 @@ import example from '../../images/example.jpg';
 import AboutEventBlock from '../eventsComponents/AboutEventBlock';
 import { TbCaravan, TbCheck } from "react-icons/tb";
 import ButtonEvents from '../eventsComponents/ButtonEvents';
+import HeaderEvent from '../eventsComponents/HeaderEvent';
+import { events } from '../../utils/constants';
 
 function AboutEvent() {
 
   return (
     <div className='container pe-3'>
+        <HeaderEvent name={'משמר העמק'} back={true} page={events}/>
         <div className='row text-end fontSizeMedium'>
-            <div className='col-12 mediumTitle mb-5 mt-2'>
-                משמר העמק <img src={arrow}/>
-            </div>
             <div className='col-6'>
                 <div className='colorGrey smallText'>
                    מקפיצן

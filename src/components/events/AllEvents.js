@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import { dateFormatting, dateTorender } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import EventElement from './EventElement';
-import HeaderEvent from './HeaderEvent';
+import HeaderEvent from '../eventsComponents/HeaderEvent';
 
 function AllEvents() {
 
@@ -11,7 +11,7 @@ function AllEvents() {
     let dates = [];
 
     useEffect(() => {
-        fetch('https://riderrs.herokuapp.com/api/runs')
+        fetch('http://81.28.7.100/api/runs')
             .then(response => response.json())
             .then(data => {
                 setEventsList(data);
@@ -21,12 +21,9 @@ function AllEvents() {
                 });
                 let datesFiltered = dates.filter((value, index, array) => array.indexOf(value) === index);
                 setUniqueDates(datesFiltered);
-                console.log(uniqueDates);
             }
         );
     }, []);
-
-    console.log(userId)
 
     return (
         <div className='container py-3 minHeight'>
@@ -43,7 +40,6 @@ function AllEvents() {
                         }
                     }
                     let sortedEvents = eventsList.filter(filter);
-                    console.log(sortedEvents)
                     return(
                         <div>
                             <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>

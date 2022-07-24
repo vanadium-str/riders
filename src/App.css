@@ -124,6 +124,15 @@ a:visited {
     background: #607AA1;
     color: #FFFFFF;
 }
+.invite {
+	position: absolute;
+	top: 33px;
+	left: 20px;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+    cursor: pointer;
+}
 
 /* start page */
 

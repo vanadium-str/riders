@@ -10,17 +10,18 @@ import FooterUser from './events/FooterUser';
 
 function SwitchPage() {
     
-    const { admin } = useContext(ridersAppContext);
+    const { admin, userId } = useContext(ridersAppContext);
 
     return(
         <Routes>
             <Route path={`/${registration}`} element={<Registration/>} exact/>
-            <Route path={`/${events}`} element={                
-                    <div>
-                        <PageConstructor/>
-                        {admin ? <FooterAdmin/> : <FooterUser/>}
-                    </div>}
-                exact/>
+            <Route path={`/${events}`} element={userId === -1 ? 
+                        <StartPage/>
+                        : <div>
+                            <PageConstructor/>
+                            {admin ? <FooterAdmin/> : <FooterUser/>}
+                        </div>}
+                    exact/>
             <Route path={`/`} element={<StartPage/>} exact/>
         </Routes>
     );

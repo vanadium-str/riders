@@ -1,11 +1,14 @@
 import React, {useContext } from 'react';
 import { ridersAppContext } from '../../utils/context';
-import { myEvents } from '../../utils/constants';
+import { aboutEvent, myEvents } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
 import InputEvent from '../eventsComponents/InputEvent';
 import InputEventSmall from '../eventsComponents/InputEventSmall';
 import Privacy from '../eventsComponents/Privacy';
-import HeaderEvent from './HeaderEvent';
+import HeaderEvent from '../eventsComponents/HeaderEvent';
+import RidersList from '../eventsComponents/RidersList';
+import AddRider from '../eventsComponents/AddRider';
+import ButtonEvents from '../eventsComponents/ButtonEvents';
 
 function CreateEvent({name, events, page}) {
 
@@ -35,6 +38,10 @@ function CreateEvent({name, events, page}) {
 
             <div className='row mb-4'>
                 <InputEvent type={'datetime-local'} content={'date'}/>
+                <InputEventSmall type={'time'} content={'time'}/>
+                <div className='col-5 text-end d-flex align-items-center justify-content-center'>
+                    זמן סיום
+                </div>
                 <InputEvent type={'text'} name={'נהג'} content={'driver'}/>
                 <InputEvent type={'number'} name={'₪ מחיר'} content={'price'}/>
             </div>
@@ -46,6 +53,9 @@ function CreateEvent({name, events, page}) {
                 <InputEventSmall type={'number'} name={'מינימום'} explanation={'כדי שהקפצה תתקיים'} content={'minimum'}/>
             </div>
             <Privacy/>
+            <RidersList/>
+            <AddRider places={3}/>
+            <ButtonEvents name={'הזמן'} page={aboutEvent} event={'create'}/>
         </div>
     );
 }

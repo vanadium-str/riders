@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import { createEvent } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
-import HeaderEvent from './HeaderEvent';
+import HeaderEvent from '../eventsComponents/HeaderEvent';
 
 function MyEvents() {
 
