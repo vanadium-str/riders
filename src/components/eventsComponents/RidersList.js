@@ -10,7 +10,7 @@ function RidersList({}) {
         <div className='row'>
             <div className='col-12 mb-2 d-flex justify-context-end rtl'>
                 <div className='fw-bold'>
-                    נרשמו   
+                    נרשמים   
                 </div>
                 <div className='colorGrey me-2'>
                     12 \ 15

@@ -36,7 +36,7 @@ function StartPage() {
                 <Button name={'כניסה'} login={true} callbackWrongMessage={callbackWrongMessage}/>
             </div>
             <SocialMedia/>
-            <div className='text-end mt-4 pe-3'>
+            <div className='text-end mt-4 pe-3 fontSizeMedium'>
                 <Link to={`/${registration}`} className='colorBlue cursor' onClick={() => {
                     setPass('');
                 }}>

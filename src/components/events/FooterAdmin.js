@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import { myEvents } from '../../utils/constants';
+import React, { useContext } from 'react';
+import { myEvents, myRuns } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function FooterAdmin() {
@@ -18,8 +18,11 @@ function FooterAdmin() {
                     כל הקפצות
                 </div>
                 <div className={`col-4 d-flex justify-content-center align-items-center
-                            ${currentBlock === 'myTrips' ? 'activeEventsSwitchButton': ''}`}
-                        onClick={() => setCurrentBlock('myTrips')}>
+                            ${currentBlock === 'myRuns' ? 'activeEventsSwitchButton': ''}`}
+                        onClick={() => {
+                            setCurrentBlock('myRuns');
+                            setPageEvent(myRuns);
+                        }}>
                     נרשמתי
                 </div>
                 <div className={`col-4 d-flex justify-content-center align-items-center

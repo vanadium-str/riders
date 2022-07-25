@@ -1,4 +1,5 @@
 import React, {useContext, useEffect} from 'react';
+import { myRuns } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function FooterUser() {
@@ -17,8 +18,11 @@ function FooterUser() {
                     כל הקפצות
                 </div>
                 <div className={`col-6 d-flex justify-content-center align-items-center
-                            ${currentBlock === 'myTrips' ? 'activeEventsSwitchButton': ''}`}
-                        onClick={() => setCurrentBlock('myTrips')}>
+                            ${currentBlock === 'myRuns' ? 'activeEventsSwitchButton': ''}`}
+                            onClick={() => {
+                                setCurrentBlock('myRuns');
+                                setPageEvent(myRuns);
+                            }}>
                     נרשמתי
                 </div>
             </div>

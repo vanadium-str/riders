@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Route, Routes } from "react-router-dom";
 import { ridersAppContext } from '../utils/context';
-import { myEvents, createEvent, aboutEvent } from '../utils/constants';
+import { myEvents, createEvent, aboutEvent, myRuns } from '../utils/constants';
 import AllEvents from './events/AllEvents';
 import MyEvents from './events/MyEvents';
 import CreateEvent from './events/CreateEvent';
 import AboutEvent from './events/AboutEvent';
+import MyRuns from './events/MyRuns';
 
 function PageConstructor() {
 
@@ -19,6 +19,10 @@ function PageConstructor() {
         case createEvent:
             return(
                 <CreateEvent/>
+            );
+        case myRuns:
+            return(
+                <MyRuns/>
             );
         case aboutEvent:
             return(

@@ -8,6 +8,7 @@ function App() {
   const [pageEvent, setPageEvent] = useState('');
   const [currentBlock, setCurrentBlock] = useState('allTrips');
   const [eventsList, setEventsList] = useState([]);
+  const [myRuns, setMyRuns] = useState([]);
   const [admin, setAdmin] = useState(1);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -21,13 +22,12 @@ function App() {
   const [maxPlaces, setMaxPlaces] = useState(0);
   const [privacy, setPrivacy] = useState('');
 
-
   return (
     <div>
       <ridersAppContext.Provider value = {
         { page, setPage, eventsList, setEventsList, currentBlock, setCurrentBlock, admin, setAdmin, pageEvent, setPageEvent, pass, setPass,
           passRepeat, setPassRepeat, email, setEmail, userId, setUserId, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
-          maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd }
+          maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, myRuns, setMyRuns }
       }>
         <SwitchPage/>
       </ridersAppContext.Provider>

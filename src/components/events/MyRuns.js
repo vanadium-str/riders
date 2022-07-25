@@ -4,34 +4,44 @@ import { ridersAppContext } from '../../utils/context';
 import EventElement from './EventElement';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 
-function AllEvents() {
+function MyRuns() {
 
-    const { eventsList, setEventsList, userId } = useContext(ridersAppContext);
+    const { myRuns, setMyRuns, userId } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
     let dates = [];
 
     useEffect(() => {
-        fetch('http://81.28.7.100/api/runs')
-            .then(response => response.json())
-            .then(data => {
-                setEventsList(data);
-                console.log(data);
+        fetch('http://81.28.7.100/api/myruns', {
+            method: 'POST',
+            body: JSON.stringify({
+              user_id: userId
+            }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setMyRuns(data);
+            console.log(data);
+            if(data.length){
                 data.forEach((item) => {                 
                     dateFormatting(dates, item);
                 });
                 let datesFiltered = dates.filter((value, index, array) => array.indexOf(value) === index);
-                setUniqueDates(datesFiltered);
+                setUniqueDates(datesFiltered);                
             }
-        );
+        })
     }, []);
 
     return (
         <div className='container py-3 minHeight'>
             <HeaderEvent name={'הקפצות'} back={false}/>
             <div className='row-reverse'>
+                {myRuns.length ?
 
-                {uniqueDates.map((item) => {
+                uniqueDates.map((item) => {
                     function filter (data){
                         let dateFormat = new Date(data.time_start);
                         if(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}` === item){
@@ -40,7 +50,7 @@ function AllEvents() {
                             return false;
                         }
                     }
-                    let sortedEvents = eventsList.filter(filter);
+                    let sortedEvents = myRuns.filter(filter);
                     return(
                         <div>
                             <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
@@ -53,30 +63,16 @@ function AllEvents() {
                             })}
                         </div>
                     )
-                })}
+                })
+
+                :   <div>
+                        nothing
+                    </div>
+                }
+
             </div>
         </div>
     );
 }
 
-export default AllEvents;
-
-                {/* <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
-                    15/07 {week[0]}'
-                </div>
-                <div className='col-12'>
-                    <EventElement/>
-                </div>
-                <div className='col-12'>
-                    <EventElement/>
-                </div>
-
-                <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
-                    16/07 {week[1]}'
-                </div>
-                <div className='col-12'>
-                    <EventElement/>
-                </div>
-                <div className='col-12'>
-                    <EventElement/>
-                </div> */}
+export default MyRuns;

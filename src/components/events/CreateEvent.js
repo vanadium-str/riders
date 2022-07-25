@@ -1,18 +1,22 @@
-import React, {useContext } from 'react';
+import React, {useContext, useState } from 'react';
 import { ridersAppContext } from '../../utils/context';
-import { aboutEvent, myEvents } from '../../utils/constants';
+import { myEvents } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
 import InputEvent from '../eventsComponents/InputEvent';
 import InputEventSmall from '../eventsComponents/InputEventSmall';
 import Privacy from '../eventsComponents/Privacy';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
-import RidersList from '../eventsComponents/RidersList';
-import AddRider from '../eventsComponents/AddRider';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 
-function CreateEvent({name, events, page}) {
+function CreateEvent() {
 
-    const {setPageEvent} = useContext(ridersAppContext);
+    const { date } = useContext(ridersAppContext);
+
+    const [emptyField, setEmptyField] = useState('');
+
+    const callbackWrongField = (field) => {
+        setEmptyField(field);
+    }
 
     return (
         <div className='container py-3 minHeight'>
@@ -37,25 +41,30 @@ function CreateEvent({name, events, page}) {
             </div>
 
             <div className='row mb-4'>
-                <InputEvent type={'datetime-local'} content={'date'}/>
-                <InputEventSmall type={'time'} content={'time'}/>
-                <div className='col-5 text-end d-flex align-items-center justify-content-center'>
-                    זמן סיום
-                </div>
-                <InputEvent type={'text'} name={'נהג'} content={'driver'}/>
-                <InputEvent type={'number'} name={'₪ מחיר'} content={'price'}/>
+                <InputEvent type={'date'} content={'date'} empty={emptyField === 'date' ? true : false}/>
+                {date ? 
+                <div className='row g-0'>
+                    <InputEventSmall type={'time'} content={'timeEnd'} explanation={'זמן סיום'}
+                            empty={emptyField === 'dateEnd' ? true : false}/>
+                    <InputEventSmall type={'time'} content={'timeStart'} explanation={'זמן התחלה'}
+                            empty={emptyField === 'date' ? true : false}/>
+                </div>    
+                : <></>}
+
+                <InputEvent type={'text'} name={'נהג'} content={'driver'} empty={emptyField === 'driver' ? true : false}/>
+                <InputEvent type={'number'} name={'₪ מחיר'} content={'price'} empty={emptyField === 'price' ? true : false}/>
             </div>
             <div className='row justify-content-center mb-4'>
                 <div className='col-11 text-end fw-bold'>
                     מקומות 
                 </div>
-                <InputEventSmall type={'number'} name={'מקסימום'} explanation={'שנכנס להגלה'} content={'maximum'}/>
-                <InputEventSmall type={'number'} name={'מינימום'} explanation={'כדי שהקפצה תתקיים'} content={'minimum'}/>
+                <InputEventSmall type={'number'} name={'מקסימום'} explanation={'שנכנס להגלה'} content={'maximum'}
+                        empty={emptyField === 'maxPlaces' ? true : false}/>
+                <InputEventSmall type={'number'} name={'מינימום'} explanation={'כדי שהקפצה תתקיים'} content={'minimum'}
+                        empty={emptyField === 'minPlaces' ? true : false}/>
             </div>
             <Privacy/>
-            <RidersList/>
-            <AddRider places={3}/>
-            <ButtonEvents name={'הזמן'} page={aboutEvent} event={'create'}/>
+            <ButtonEvents name={'הזמן'} page={myEvents} event={'create'} callbackWrongField={callbackWrongField}/>
         </div>
     );
 }

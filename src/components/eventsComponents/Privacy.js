@@ -3,9 +3,9 @@ import { ridersAppContext } from '../../utils/context';
 
 function Privacy() {
 
-    const {setPrivacy} = useContext(ridersAppContext);
+    const { setPrivacy } = useContext(ridersAppContext);
 
-    const [bottom, setBottom] = useState(true);
+    const [bottom, setBottom] = useState(false);
 
     return (
         <div className='d-flex flex-column align-items-center cursor mb-4'>
