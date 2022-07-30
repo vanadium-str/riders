@@ -5,8 +5,13 @@ export const myRuns = 'myRuns';
 export const allEvents = 'allEvents';
 export const createEvent = 'createEvent';
 export const aboutEvent = 'aboutEvent';
-export const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט',
+export const joinSuccess = 'joinSuccess';
+export const joinFailure = 'joinFailure';
+export const waitingList = 'waitingList';
+
+const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט',
         'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+const week = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'שבת'];
 
 export function dateFormatting(date, item){
         let dateFormat = new Date(item.time_start);
@@ -14,7 +19,7 @@ export function dateFormatting(date, item){
 }
 
 export function dateTorender(date){
-        const week = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'שבת'];
+
         let array = date.split('/');
         let dateFormat = new Date(array[2], array[1].toString() - 1, array[0]);
         let day = week[dateFormat.getDay()];
@@ -30,6 +35,14 @@ export function timeToRender(date){
                 minutes = dateFormat.getMinutes();
         }
         return `${dateFormat.getHours()}:${minutes}`;
+}
+
+export function joinSuccessDate(date){
+        let dateFormat = new Date(date);
+        let time = timeToRender(date);
+        let day = `${week[dateFormat.getDay()]}'`;
+        let month = months[dateFormat.getMonth()];
+        return `${day} ${dateFormat.getDate()} ל${month} ${time}`
 }
 
 // export function swap(items, firstIndex, secondIndex){

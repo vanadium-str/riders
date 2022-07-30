@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import { TbCaravan } from "react-icons/tb";
 import { aboutEvent, timeToRender } from '../../utils/constants';
 import { ridersAppContext } from "../../utils/context";
@@ -7,12 +7,13 @@ import PlaceAndTime from '../eventsComponents/PlaceAndTime';
 
 function EventElement({event}) {
 
-    const {setPageEvent} = useContext(ridersAppContext);
+    const { setPageEvent, setCurrentEvent } = useContext(ridersAppContext);
     
     const vacancy = event.max_participants - event.booked;
 
     return(
         <div className='container backgroundElement my-1 p-2 cursor' onClick={() => {
+            setCurrentEvent(event.event_id);
             setPageEvent(aboutEvent);
         }}>
             <div className='row text-end d-flex align-items-end'>

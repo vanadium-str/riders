@@ -12,7 +12,7 @@ function AllEvents() {
     let dates = [];
 
     useEffect(() => {
-        fetch('http://81.28.7.100/api/runs')
+        fetch('http://www.snowsolutions.me/api/runs')
             .then(response => response.json())
             .then(data => {
                 setEventsList(data);
@@ -31,7 +31,7 @@ function AllEvents() {
             <HeaderEvent name={'הקפצות'} back={false}/>
             <div className='row-reverse'>
 
-                {uniqueDates.map((item) => {
+                {eventsList.length ? uniqueDates.map((item) => {
                     function filter (data){
                         let dateFormat = new Date(data.time_start);
                         if(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}` === item){
@@ -53,7 +53,11 @@ function AllEvents() {
                             })}
                         </div>
                     )
-                })}
+                })
+                :   <div className='text-end'>
+                        אין הקפצות נפתחות
+                    </div>
+                }
             </div>
         </div>
     );

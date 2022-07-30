@@ -9,14 +9,14 @@ function MyEvents() {
     const {setPage} = useContext(ridersAppContext);
 
     return (
-        <div className='container py minHeight'>
+        <div className='container minHeight'>
             <HeaderEvent name={'הקפצות שפתחתי'} back={false}/>
             <div className='row'>
                 <div className='col-12 text-end'>
                     לא נמצאים הקפצות
                 </div>
                 <div className='buttonBottom'>
-                    <ButtonEvents name={'+'} events={true} page={createEvent}/>
+                    <ButtonEvents name={'+'} page={createEvent}/>
                 </div>
             </div>
         </div>

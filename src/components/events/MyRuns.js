@@ -12,7 +12,7 @@ function MyRuns() {
     let dates = [];
 
     useEffect(() => {
-        fetch('http://81.28.7.100/api/myruns', {
+        fetch('http://www.snowsolutions.me/api/myruns', {
             method: 'POST',
             body: JSON.stringify({
               user_id: userId
@@ -65,8 +65,8 @@ function MyRuns() {
                     )
                 })
 
-                :   <div>
-                        nothing
+                :   <div className='text-end'>
+                        אין הקפצות נפתחות
                     </div>
                 }
 

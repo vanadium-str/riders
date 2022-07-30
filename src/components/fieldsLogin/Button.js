@@ -14,7 +14,7 @@ function Button({name, login, callbackWrongMessage}) {
     };
 
     const loginCheck = () => {
-        fetch('http://81.28.7.100/api/login', {
+        fetch('http://www.snowsolutions.me/api/login', {
                 method: 'POST',
                 body: JSON.stringify({
                 email: email,
@@ -40,7 +40,7 @@ function Button({name, login, callbackWrongMessage}) {
         if(email === ''){
             callbackWrongMessage(0);
         }else if(pass === passRepeat && pass !== '' && passRepeat !== ''){
-            fetch('http://81.28.7.100/api/register', {
+            fetch('http://www.snowsolutions.me/api/register', {
                 method: 'POST',
                 body: JSON.stringify({
                     email: email,
