@@ -13,7 +13,7 @@ function WaitingSuccess() {
     })
 
     return (
-        <div className='container pe-3'>
+        <div className='container pe-3 mt-2'>
             <div className='row'>
                 <div className='col-12 pageTitle mb-5'>
                     נרשמת להמתנה להקפמה ב{event.spot}
@@ -30,7 +30,7 @@ function WaitingSuccess() {
                     </p>
                 </div>
                 <div className='buttonBottom'>
-                    <ButtonEvents name={'מצוין'} event={'home'}/>
+                    <ButtonEvents name={'הקפצות שלי'} event={'home'}/>
                 </div>
             </div>
         </div>

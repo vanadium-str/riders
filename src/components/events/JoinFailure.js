@@ -14,11 +14,13 @@ function JoinFailure() {
     })
 
     return (
-        <div className='container pe-3'>
+        <div className='container pe-3 mt-2'>
             <div className='row'>
+                <div className='col-12 pageTitle mb-1'>
+                    Oops
+                </div>
                 <div className='col-12 pageTitle mb-5'>
-                    {/* change */}
-                    נרשמת להקפצה ב{event.spot} בהצלחה
+                    נגמרו מקומות בהקפצה
                 </div>
                 <div className='text-end ps-4'>
                     <p>

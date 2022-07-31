@@ -25,14 +25,19 @@ function EventElement({event}) {
                     ${vacancy === 0 ? 'colorRed' : ''}`}>
                     <NumberOfSeats number={vacancy} name={'פנוי'} big={true}/>
                 </div>
-                <div className='col-2'>
-                    <NumberOfSeats number={event.waiting} name={'בהמתנה'} big={true}/>
-                </div>
-                <div className='col-6'>
+                {event.waiting ? 
+                    <div className='col-2'>
+                        <NumberOfSeats number={event.waiting} name={'בהמתנה'} big={true}/>
+                    </div>            
+                : <></>}
+                <div className={`${event.waiting ? 'col-6' : 'col-8'}`}>
                    <PlaceAndTime place={event.spot} timeFrom={timeToRender(event.time_start)}
                     timeTo={timeToRender(event.time_end)} done={event.booked >= event.min_participants ? true : false}/>
                 </div>
-                <div className='col-12 colorGrey'>
+                <div className={`col-9 text-start ps-4 smallText ${event.is_private ? 'colorRed' : 'colorBlue'}`}>
+                    {event.is_private ? 'אירוע פרטי, לא ניתן להצטרף' : 'צרף'}
+                </div>
+                <div className='col-3 colorGrey'>
                     {event.driver} <TbCaravan/>
                 </div>
             </div>

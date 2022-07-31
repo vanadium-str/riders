@@ -1,20 +1,75 @@
-import React, {useContext, useEffect} from 'react';
-import { createEvent } from '../../utils/constants';
+import React, { useContext, useEffect, useState } from 'react';
+import { createEvent, dateFormatting, dateTorender } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
+import EventElement from './EventElement';
 
 function MyEvents() {
 
-    const {setPage} = useContext(ridersAppContext);
+    const { userId, myEvents, setMyEvents } = useContext(ridersAppContext);
+
+    const [uniqueDates, setUniqueDates] = useState([]);
+    let dates = [];
+
+    useEffect(() => {
+        fetch('http://www.snowsolutions.me/api/mycreated', {
+            method: 'POST',
+            body: JSON.stringify({
+              user_id: userId
+            }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+        })
+        .then(response => response.json())
+        .then(data => {
+            setMyEvents(data);
+            console.log(data);
+            if(data.length){
+                data.forEach((item) => {                 
+                    dateFormatting(dates, item);
+                });
+                let datesFiltered = dates.filter((value, index, array) => array.indexOf(value) === index);
+                setUniqueDates(datesFiltered);                
+            }
+        })
+    }, []);
 
     return (
-        <div className='container minHeight'>
+        <div className='container py-3 minHeight'>
             <HeaderEvent name={'הקפצות שפתחתי'} back={false}/>
             <div className='row'>
-                <div className='col-12 text-end'>
-                    לא נמצאים הקפצות
-                </div>
+                {myEvents.length ?
+
+                    uniqueDates.map((item) => {
+                        function filter (data){
+                            let dateFormat = new Date(data.time_start);
+                            if(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}` === item){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        }
+                        let sortedEvents = myEvents.filter(filter);
+                        return(
+                            <div>
+                                <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
+                                    {dateTorender(item)}
+                                </div>
+                                {sortedEvents.map((event) => {
+                                    return(
+                                        <EventElement event={event}/>
+                                    )
+                                })}
+                            </div>
+                        )
+                    })
+
+                :   <div className='col-12 text-end'>
+                        לא נמצאים הקפצות
+                    </div>
+                }
                 <div className='buttonBottom'>
                     <ButtonEvents name={'+'} page={createEvent}/>
                 </div>

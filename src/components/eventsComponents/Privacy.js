@@ -11,6 +11,7 @@ function Privacy() {
         <div className='d-flex flex-column align-items-center cursor mb-4'>
             <div className={`inputSize chooseTopBlock p-2 text-end ${bottom ? 'colorGrey' : 'backgroundBlue'}`} onClick={() => {
                 setBottom(false);
+                setPrivacy(0);
             }}>
                 <div className='fw-bold'>
                     הקפצה ציבורי
@@ -21,6 +22,7 @@ function Privacy() {
             </div>
             <div className={`inputSize chooseBottomBlock p-2 text-end ${bottom ? 'backgroundBlue' : 'colorGrey'}`} onClick={() => {
                 setBottom(true);
+                setPrivacy(1);
             }}>
                 <div className='fw-bold'>
                     הקפצה פרטי

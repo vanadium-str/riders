@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ridersAppContext } from '../../utils/context';
 import example from '../../images/example.jpg';
 import AboutEventBlock from '../eventsComponents/AboutEventBlock';
@@ -6,10 +6,13 @@ import { TbCaravan, TbCheck } from "react-icons/tb";
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import { dateFormatting, dateTorender, events, timeToRender } from '../../utils/constants';
+import ModalEdit from '../eventsComponents/ModalEdit';
 
 function AboutEvent() {
 
     const { eventsList, currentEvent } = useContext(ridersAppContext);
+    
+    const [activeModal, setActiveModal] = useState(false);
     
     const event = eventsList.find((value) => {
         return value.event_id === currentEvent
@@ -19,7 +22,7 @@ function AboutEvent() {
     dateFormatting(date, event);
 
     return (
-        <div className='container pe-3 minHeight'>
+        <div className='container pe-3 minHeight position-relative'>
             <HeaderEvent name={event.spot} back={true} page={events}/>
             <div className='row text-end fontSizeMedium'>
                 <div className='col-6'>
@@ -44,16 +47,19 @@ function AboutEvent() {
                 <AboutEventBlock top={'מוביל'} middle={event.admin} bottom={'055 271-8504'}/>
                 <AboutEventBlock top={'מסלול'} middle={'מסלול שחור 💀'} bottom={'מפה'}/>
 
-                <div className='col-12 row tripDone mt-3'>
-                    <div className='col-10'>
-                        אירוע יתקיים בוודעות. מספיק רוכבים נרשמו
-                    </div>
-                    <div className='col-2 iconDoneBig'>
-                        <TbCheck/>
-                    </div>
-                </div>
+                {event.min_participants <= event.booked ? 
+                    <div className='col-12 row tripDone mt-3'>
+                        <div className='col-10'>
+                            אירוע יתקיים בוודעות. מספיק רוכבים נרשמו
+                        </div>
+                        <div className='col-2 iconDoneBig'>
+                            <TbCheck/>
+                        </div>
+                    </div>                
+                : <></>}
                 
                 <ButtonEvents name={'הלמן'} event={'join'}/>
+                {/* <ModalEdit active={activeModal} setActive={setActiveModal}/> */}
 
                 {/* <div className='col-7 text-start ms-3 colorBlue'>
                     צפו בעוד

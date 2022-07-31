@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { joinSuccess, events, joinFailure, waitingList } from '../../utils/constants';
+import { joinSuccess, events, joinFailure, waitingList, myRuns } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
-    const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, userId, setDate, setDateEnd, setDriver, setPrice,
+    const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, userId, setDate, setDateEnd, setDriver, setPrice,
             setMinPlaces, setMaxPlaces, setPrivacy, currentEvent } = useContext(ridersAppContext);
     
     let navigate = useNavigate();
     const eventsPage = () => {
-        setPageEvent('');
+        setPageEvent(myRuns);
         navigate(`/${events}`);
     };
 
@@ -37,6 +37,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     price: price,
                     time_start: date,
                     time_end: dateEnd,
+                    is_private: privacy,
                     spot_id: 2,
                     user_id: userId
                 }),
@@ -78,7 +79,6 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                 navigate(`/${joinFailure}`);
             }else if(data.status === 2){
                 //already joined
-                navigate(`/${joinFailure}`);
             }else if(data.status === 3){
                 console.error('No such event');
             }else if(data.status === -1){
