@@ -5,16 +5,19 @@ import { ridersAppContext } from "../../utils/context";
 import NumberOfSeats from '../eventsComponents/NumberOfSeats';
 import PlaceAndTime from '../eventsComponents/PlaceAndTime';
 
-function EventElement({event}) {
+function EventElement({ event, page }) {
 
-    const { setPageEvent, setCurrentEvent } = useContext(ridersAppContext);
+    const { setPageEvent, setCurrentEvent, admin, setCurrentPage } = useContext(ridersAppContext);
     
     const vacancy = event.max_participants - event.booked;
 
     return(
         <div className='container backgroundElement my-1 p-2 cursor' onClick={() => {
-            setCurrentEvent(event.event_id);
-            setPageEvent(aboutEvent);
+            if(event.is_private === 0 || admin === 1){
+                setCurrentEvent(event.event_id);
+                setCurrentPage(page);
+                setPageEvent(aboutEvent);
+            }
         }}>
             <div className='row text-end d-flex align-items-end'>
                 <div className={`col-2  ${vacancy < 4 ? 'colorOrange' : ''}
@@ -34,8 +37,8 @@ function EventElement({event}) {
                    <PlaceAndTime place={event.spot} timeFrom={timeToRender(event.time_start)}
                     timeTo={timeToRender(event.time_end)} done={event.booked >= event.min_participants ? true : false}/>
                 </div>
-                <div className={`col-9 text-start ps-4 smallText ${event.is_private ? 'colorRed' : 'colorBlue'}`}>
-                    {event.is_private ? 'אירוע פרטי, לא ניתן להצטרף' : 'צרף'}
+                <div className={`col-9 text-start ps-3 smallText ${event.is_private ? 'colorRed' : 'colorBlue'}`}>
+                    {event.is_private ? 'אירוע פרטי, לא ניתן להצטרף' : 'תצטרפו'}
                 </div>
                 <div className='col-3 colorGrey'>
                     {event.driver} <TbCaravan/>

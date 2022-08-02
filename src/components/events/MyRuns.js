@@ -58,7 +58,7 @@ function MyRuns() {
                             </div>
                             {sortedEvents.map((event) => {
                                 return(
-                                    <EventElement event={event}/>
+                                    <EventElement event={event} page={'myRuns'}/>
                                 )
                             })}
                         </div>

@@ -37,7 +37,7 @@ function MyEvents() {
     }, []);
 
     return (
-        <div className='container py-3 minHeight'>
+        <div className='container py-3 minHeight position-relative'>
             <HeaderEvent name={'הקפצות שפתחתי'} back={false}/>
             <div className='row'>
                 {myEvents.length ?
@@ -59,7 +59,7 @@ function MyEvents() {
                                 </div>
                                 {sortedEvents.map((event) => {
                                     return(
-                                        <EventElement event={event}/>
+                                        <EventElement event={event} page={'myEvents'}/>
                                     )
                                 })}
                             </div>

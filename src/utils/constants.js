@@ -8,6 +8,9 @@ export const aboutEvent = 'aboutEvent';
 export const joinSuccess = 'joinSuccess';
 export const joinFailure = 'joinFailure';
 export const waitingList = 'waitingList';
+export const unsubscribeSuccess = 'unsubscribe';
+export const alreadyJoin = 'alreadyJoin';
+export const errorPage = 'error';
 
 const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט',
         'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];

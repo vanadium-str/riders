@@ -33,10 +33,8 @@ function JoinFailure() {
                         נכון לעכשיו - {event.waiting} אנשים ברשימת המתנה
                     </p>
                 </div>
-                <div className='buttonBottom'>
-                    <ButtonEvents name={'להירשם להמתנה'} event={'joinWaiting'}/>
-                </div>
-                <div className='col-12 d-flex justify-content-center colorBlue cursor mb-3 buttonBottom'
+                <ButtonEvents name={'להירשם להמתנה'} event={'joinWaiting'}/>
+                <div className='col-12 d-flex justify-content-center colorBlue cursor bottom'
                     onClick={() => {
                         setPageEvent('');
                         navigate(`/${events}`);

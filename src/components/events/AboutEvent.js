@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { ridersAppContext } from '../../utils/context';
 import example from '../../images/example.jpg';
 import AboutEventBlock from '../eventsComponents/AboutEventBlock';
@@ -6,13 +6,11 @@ import { TbCaravan, TbCheck } from "react-icons/tb";
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import { dateFormatting, dateTorender, events, timeToRender } from '../../utils/constants';
-import ModalEdit from '../eventsComponents/ModalEdit';
+import RidersList from '../eventsComponents/RidersList';
 
 function AboutEvent() {
 
-    const { eventsList, currentEvent } = useContext(ridersAppContext);
-    
-    const [activeModal, setActiveModal] = useState(false);
+    const { eventsList, currentEvent, currentPage, admin } = useContext(ridersAppContext);
     
     const event = eventsList.find((value) => {
         return value.event_id === currentEvent
@@ -20,6 +18,12 @@ function AboutEvent() {
     const vacancy = event.max_participants - event.booked;
     let date = [];
     dateFormatting(date, event);
+
+    console.log(event.booked);
+    console.log(admin);
+    console.log(currentPage === 'myEvents');
+    console.log(event);
+
 
     return (
         <div className='container pe-3 minHeight position-relative'>
@@ -57,9 +61,18 @@ function AboutEvent() {
                         </div>
                     </div>                
                 : <></>}
+
+                {event.booked && admin && currentPage === 'myEvents' ? 
+                    <RidersList booked={event.booked} max={event.max_participants} eventId={event.event_id}/>
+                : <></>}
                 
-                <ButtonEvents name={'הלמן'} event={'join'}/>
-                {/* <ModalEdit active={activeModal} setActive={setActiveModal}/> */}
+                {currentPage === 'allEvents' ? <ButtonEvents name={'הלמן'} event={'join'}/>
+                : currentPage === 'myRuns' 
+                    ? <ButtonEvents name={'בטל'} event={'unsubscribe'}/> 
+                    : <ButtonEvents name={'שינוי זמן'} event={'edit'}/>                   
+                }
+                
+
 
                 {/* <div className='col-7 text-start ms-3 colorBlue'>
                     צפו בעוד

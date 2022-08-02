@@ -48,7 +48,7 @@ function AllEvents() {
                             </div>
                             {sortedEvents.map((event) => {
                                 return(
-                                    <EventElement event={event}/>
+                                    <EventElement event={event} page={'allEvents'}/>
                                 )
                             })}
                         </div>

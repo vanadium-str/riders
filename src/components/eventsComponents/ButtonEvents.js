@@ -1,15 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { joinSuccess, events, joinFailure, waitingList, myRuns } from '../../utils/constants';
+import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
+import ModalEdit from '../eventsComponents/ModalEdit';
+import ModalUnsubscribe from './ModalUnsubscribe';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
     const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, userId, setDate, setDateEnd, setDriver, setPrice,
-            setMinPlaces, setMaxPlaces, setPrivacy, currentEvent } = useContext(ridersAppContext);
+            setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock } = useContext(ridersAppContext);
+
+    const [activeModalEdit, setActiveModalEdit] = useState(false);
+    const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
     
     let navigate = useNavigate();
     const eventsPage = () => {
+        setCurrentBlock('myRuns');
         setPageEvent(myRuns);
         navigate(`/${events}`);
     };
@@ -49,7 +55,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             .then(data => {
                 if(data.status === -1){
                     console.error('Data Base Error');
-   // error page                 
+                    navigate(`/${errorPage}`);                 
                 }else{
                     console.log(data);
                     resetAll();
@@ -78,11 +84,13 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             }else if(data.status === 1){
                 navigate(`/${joinFailure}`);
             }else if(data.status === 2){
-                //already joined
+                navigate(`/${alreadyJoin}`);
             }else if(data.status === 3){
                 console.error('No such event');
+                navigate(`/${errorPage}`);
             }else if(data.status === -1){
                 console.error('Data Base Error');
+                navigate(`/${errorPage}`);
             }
         })
     }
@@ -107,17 +115,22 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                 // no free places
             }else if(data.status === -1){
                 console.error('Data Base Error');
+                navigate(`/${errorPage}`);
             }
         })
     }
     
     return (
-        <div className='d-flex justify-content-center my-5'>
-            <button className='button' onClick={() => {
+        <div className='d-flex justify-content-center mt-5'>
+            <button className='button buttonBottom' onClick={() => {
                 if(event === 'create'){
                     createEvent();
                 }else if(event === 'join'){
                     joinEvent();
+                }else if(event === 'unsubscribe'){
+                    setActiveModalUnsubscribe(true);
+                }else if(event === 'edit'){
+                    setActiveModalEdit(true);
                 }else if(event === 'joinWaiting'){
                     joinWaiting();
                 }else if(event === 'home'){
@@ -128,6 +141,9 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             }}>
                 {name}
             </button>
+
+            <ModalEdit active={activeModalEdit} setActive={setActiveModalEdit}/>
+            <ModalUnsubscribe active={activeModalUnsubscribe} setActive={setActiveModalUnsubscribe}/>
         </div>
     );
 

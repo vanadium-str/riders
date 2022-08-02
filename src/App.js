@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css';
+import JoinFailure from './components/events/JoinFailure';
 import SwitchPage from './components/SwitchPage';
 import { ridersAppContext } from './utils/context';
 
@@ -10,6 +11,8 @@ function App() {
   const [eventsList, setEventsList] = useState([]);
   const [myRuns, setMyRuns] = useState([]);
   const [myEvents, setMyEvents] = useState([]);
+  const [ridersList, setRidersList] = useState([]);
+  const [spotsList, setSpotsList] = useState([]);
   const [admin, setAdmin] = useState(1);
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -23,6 +26,7 @@ function App() {
   const [maxPlaces, setMaxPlaces] = useState(0);
   const [privacy, setPrivacy] = useState(0);
   const [currentEvent, setCurrentEvent] = useState(-1);
+  const [currentPage, setCurrentPage] = useState('');
 
   return (
     <div>
@@ -30,7 +34,7 @@ function App() {
         { page, setPage, eventsList, setEventsList, currentBlock, setCurrentBlock, admin, setAdmin, pageEvent, setPageEvent, pass, setPass,
           passRepeat, setPassRepeat, email, setEmail, userId, setUserId, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
           maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, myRuns, setMyRuns, currentEvent, setCurrentEvent, myEvents,
-          setMyEvents }
+          setMyEvents, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList }
       }>
         <SwitchPage/>
       </ridersAppContext.Provider>

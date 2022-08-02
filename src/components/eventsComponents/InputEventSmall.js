@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import { ridersAppContext } from '../../utils/context';
 
 function InputEventSmall({ type, name, explanation, content, empty }) {
@@ -23,6 +23,10 @@ function InputEventSmall({ type, name, explanation, content, empty }) {
         }else if(content === 'timeStart'){
             setTime(event, true);
         }else if(content === 'timeEnd'){
+            setTime(event, false);
+        }else if(content === 'timeStartEdit'){
+            setTime(event, true);
+        }else if(content === 'timeEndEdit'){
             setTime(event, false);
         }
     }

@@ -1,4 +1,4 @@
-import React, {useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { ridersAppContext } from '../../utils/context';
 import { myEvents } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
@@ -10,13 +10,22 @@ import ButtonEvents from '../eventsComponents/ButtonEvents';
 
 function CreateEvent() {
 
-    const { date } = useContext(ridersAppContext);
+    const { date, spotsList, setSpotsList } = useContext(ridersAppContext);
 
     const [emptyField, setEmptyField] = useState('');
 
     const callbackWrongField = (field) => {
         setEmptyField(field);
     }
+
+    useEffect(() => {
+        fetch('http://www.snowsolutions.me/api/spots')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            setSpotsList(data);
+        })
+    }, []);
 
     return (
         <div className='container py-3 minHeight'>
@@ -27,7 +36,7 @@ function CreateEvent() {
                 </div>
                 <div className='col-6 fw-bold row'>
                     <div className='colorGrey fw-normal text-end col-6'>
-                        6
+                        {spotsList.length}
                     </div>
                     <div className='col-6 text-end'>
                         יעדים
@@ -35,9 +44,11 @@ function CreateEvent() {
                 </div>
             </div>
             <div className='row justify-content-center'>
-                <Location name={'משמר העמק'}/>
-                <Location name={'משגב'}/>
-                <Location name={'כפר החורש'}/>
+                {spotsList.map((item) => {
+                    return(
+                        <Location name={item.coordinates}/>
+                    );
+                })}
             </div>
 
             <div className='row mb-4'>

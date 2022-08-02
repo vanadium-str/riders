@@ -28,9 +28,7 @@ function JoinSuccess() {
                         מומלץ להגיע למקום רבע שעה לפני זמן התחלה. אם אתם מאחרים צרו קשר עם המוביל מראש
                     </p>
                 </div>
-                <div className='buttonBottom'>
-                    <ButtonEvents name={'הקפצות שלי'} event={'home'}/>
-                </div>
+                <ButtonEvents name={'הקפצות שלי'} event={'home'}/>
             </div>
         </div>
     );

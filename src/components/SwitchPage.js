@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { ridersAppContext } from '../utils/context';
-import { events, joinFailure, joinSuccess, registration, waitingList } from '../utils/constants';
+import { alreadyJoin, errorPage, events, joinFailure, joinSuccess, registration, unsubscribeSuccess, waitingList } from '../utils/constants';
 import Registration from './login/Registration';
 import PageConstructor from './PageConstructor';
 import StartPage from './login/StartPage';
@@ -10,6 +10,9 @@ import FooterUser from './events/FooterUser';
 import JoinSuccess from './events/JoinSuccess';
 import JoinFailure from './events/JoinFailure';
 import WaitingSuccess from './events/WaitingSuccess';
+import UnsubscribeSuccess from './events/UnsubscribeSuccess';
+import AlreadyJoin from './events/AlreadyJoin';
+import ErrorPage from './events/ErrorPage';
 
 function SwitchPage() {
     
@@ -28,6 +31,9 @@ function SwitchPage() {
             <Route path={`/${joinSuccess}`} element={<JoinSuccess/>} exact/>
             <Route path={`/${joinFailure}`} element={<JoinFailure/>} exact/>
             <Route path={`/${waitingList}`} element={<WaitingSuccess/>} exact/>
+            <Route path={`/${unsubscribeSuccess}`} element={<UnsubscribeSuccess/>} exact/>
+            <Route path={`/${alreadyJoin}`} element={<AlreadyJoin/>} exact/>
+            <Route path={`/${errorPage}`} element={<ErrorPage/>} exact/>
             <Route path={`/`} element={<StartPage/>} exact/>
         </Routes>
     );

@@ -101,6 +101,17 @@ a:visited {
     border-radius: 16px;
     border: #FFFFFF;
 }
+.buttonSmall{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 48px;
+    background: #C1FB12;
+    border-radius: 16px;
+    border: #FFFFFF;
+}
 .locationBlock{
     background: #FFFFFF;
     border-radius: 16px;
@@ -180,8 +191,8 @@ a:visited {
     cursor: pointer;
 }
 .buttonBottom{
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 40px;
     cursor: pointer;
 }
 .inputWrong{
@@ -225,6 +236,10 @@ a:visited {
 .minHeight{
     min-height: 94vH;
 }
+.bottom{
+    position: absolute;
+    bottom: 10px;
+}
 
 /* modal window */
 .modal{
@@ -246,8 +261,8 @@ a:visited {
     pointer-events: all;
 }
 .modalContent{
-    padding: 20px;
-    background-color: #F7F9FA;
+    padding: 20px 5px;
+    background-color: #e2ebee;
     height: 400px;
     width: 400px;
     transform: scale(0.5);
