@@ -4,7 +4,11 @@ import arrow from '../../images/Arrow.jpg';
 
 function HeaderEvent({name, back, page}) {
 
-    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
+    const { setPageEvent, setCurrentBlock, setSpotId } = useContext(ridersAppContext);
+
+    function resetAll(){
+        setSpotId(-1); 
+    }
 
     return (
         <div className='row'>
@@ -17,6 +21,7 @@ function HeaderEvent({name, back, page}) {
                         }else{
                             setCurrentBlock('myEvents');
                         }
+                        resetAll();
                         setPageEvent(page);
                     }}/>
                     : ''}

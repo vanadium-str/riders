@@ -135,10 +135,22 @@ a:visited {
     background: #607AA1;
     color: #FFFFFF;
 }
-.invite {
+.backgroundWhite{
+    background: #FFFFFF;
+}
+.invite{
 	position: absolute;
 	top: 33px;
 	left: 20px;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+    cursor: pointer;
+}
+.map{
+	position: absolute;
+	top: 33px;
+	left: 30px;
 	display: inline-block;
 	width: 15px;
 	height: 15px;
@@ -239,6 +251,23 @@ a:visited {
 .bottom{
     position: absolute;
     bottom: 10px;
+}
+.trackBlock{
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: none;
+    padding: 14px 16px;
+    width: 304px;
+    height: 115px;
+    margin-top: 1rem;
+}
+.emoji{
+    font-size: 41px;
+}
+.backgroundGrey{
+    background: #e4dfdf;
+    border-radius: 16px;
+    padding-left: 10px;
 }
 
 /* modal window */

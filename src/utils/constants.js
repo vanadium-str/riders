@@ -4,6 +4,7 @@ export const myEvents = 'myEvents';
 export const myRuns = 'myRuns';
 export const allEvents = 'allEvents';
 export const createEvent = 'createEvent';
+export const createSpot = 'createSpot';
 export const aboutEvent = 'aboutEvent';
 export const joinSuccess = 'joinSuccess';
 export const joinFailure = 'joinFailure';
@@ -22,11 +23,10 @@ export function dateFormatting(date, item){
 }
 
 export function dateTorender(date){
-
         let array = date.split('/');
-        let dateFormat = new Date(array[2], array[1].toString() - 1, array[0]);
+        let dateFormat = new Date(array[2], array[1].toString(), array[0]);
         let day = week[dateFormat.getDay()];
-        return `${array[0]}/${array[1]} ${day}'`;
+        return `${array[0]}/${+array[1] + 1} ${day}'`;
 }
 
 export function timeToRender(date){

@@ -7,8 +7,8 @@ import ModalUnsubscribe from './ModalUnsubscribe';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
-    const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, userId, setDate, setDateEnd, setDriver, setPrice,
-            setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock } = useContext(ridersAppContext);
+    const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, userId, spotId, spotName, trackLevel, setDate,
+            setDateEnd, setDriver, setPrice, setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock } = useContext(ridersAppContext);
 
     const [activeModalEdit, setActiveModalEdit] = useState(false);
     const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
@@ -44,7 +44,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     time_start: date,
                     time_end: dateEnd,
                     is_private: privacy,
-                    spot_id: 2,
+                    spot_id: spotId,
                     user_id: userId
                 }),
                 headers: {
@@ -119,6 +119,31 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             }
         })
     }
+
+    const createSpot = () => {
+        console.log(spotName);
+        console.log(trackLevel);
+        if(spotName === ''){
+            callbackWrongField('name');
+        }else if(!trackLevel.length){
+            callbackWrongField('level');
+        }else{
+            fetch('http://www.snowsolutions.me/api/create_spot',{
+                method: 'POST',
+                body: JSON.stringify({
+                    name: spotName,
+                    levels: trackLevel
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+        }       
+    }
     
     return (
         <div className='d-flex justify-content-center mt-5'>
@@ -135,6 +160,8 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     joinWaiting();
                 }else if(event === 'home'){
                     eventsPage();
+                }else if(event === 'createSpot'){
+                    createSpot();
                 }else{
                     setPageEvent(page);
                 }

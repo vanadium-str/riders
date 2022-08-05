@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ridersAppContext } from '../../utils/context';
-import { myEvents } from '../../utils/constants';
+import { createSpot, myEvents } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
 import InputEvent from '../eventsComponents/InputEvent';
 import InputEventSmall from '../eventsComponents/InputEventSmall';
@@ -10,7 +10,7 @@ import ButtonEvents from '../eventsComponents/ButtonEvents';
 
 function CreateEvent() {
 
-    const { date, spotsList, setSpotsList } = useContext(ridersAppContext);
+    const { date, spotsList, setSpotsList, setPageEvent } = useContext(ridersAppContext);
 
     const [emptyField, setEmptyField] = useState('');
 
@@ -23,7 +23,7 @@ function CreateEvent() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            setSpotsList(data);
+            setSpotsList(data);   
         })
     }, []);
 
@@ -31,7 +31,7 @@ function CreateEvent() {
         <div className='container py-3 minHeight'>
             <HeaderEvent name={'לפתוח הקפצה'} back={true} page={myEvents}/>
             <div className='row ms-1 mb-3'>
-                <div className='col-6 colorBlue'>
+                <div className='col-6 colorBlue' onClick={() => setPageEvent(createSpot)}>
                     להוסיף יעד
                 </div>
                 <div className='col-6 fw-bold row'>
@@ -46,7 +46,7 @@ function CreateEvent() {
             <div className='row justify-content-center'>
                 {spotsList.map((item) => {
                     return(
-                        <Location name={item.coordinates}/>
+                        <Location name={item.name} id={item.spot_id}/>
                     );
                 })}
             </div>
