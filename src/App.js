@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './App.css';
-import JoinFailure from './components/events/JoinFailure';
 import SwitchPage from './components/SwitchPage';
 import { ridersAppContext } from './utils/context';
 
@@ -28,8 +27,11 @@ function App() {
   const [spotId, setSpotId] = useState(-1);
   const [spotName, setSpotName] = useState('');
   const [trackLevel, setTrackLevel] = useState([]);
+  const [coordinates, setCoordinates] = useState([]);
   const [currentEvent, setCurrentEvent] = useState(-1);
   const [currentPage, setCurrentPage] = useState('');
+  const [userData, setUserData] = useState('');
+  const [oldPass, setOldPass] = useState('');
 
   return (
     <div>
@@ -38,7 +40,7 @@ function App() {
           passRepeat, setPassRepeat, email, setEmail, userId, setUserId, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
           maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, myRuns, setMyRuns, currentEvent, setCurrentEvent, myEvents,
           setMyEvents, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
-          setTrackLevel, spotName, setSpotName }
+          setTrackLevel, spotName, setSpotName, userData, setUserData, coordinates, setCoordinates, oldPass, setOldPass }
       }>
         <SwitchPage/>
       </ridersAppContext.Provider>

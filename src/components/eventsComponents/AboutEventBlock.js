@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { ridersAppContext } from '../../utils/context';
-import { TbCaravan } from "react-icons/tb";
+import { createLink } from "../../utils/constants";
 
-function AboutEventBlock({top, middle, bottom}) {
+function AboutEventBlock({ top, middle, bottom, coordinates }) {
 
   return (
     <div className='col-6 mt-2'>
@@ -12,7 +10,11 @@ function AboutEventBlock({top, middle, bottom}) {
       <div className=''>
         {middle}
       </div>
-      <div className='colorBlue'>
+      <div className='colorBlue' onClick={() => {
+        if(bottom === 'מפה'){
+          window.open(createLink(coordinates));
+        }
+      }}>
         {bottom}
       </div>
     </div>

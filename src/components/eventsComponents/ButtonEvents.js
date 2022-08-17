@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage } from '../../utils/constants';
+import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ModalEdit from '../eventsComponents/ModalEdit';
 import ModalUnsubscribe from './ModalUnsubscribe';
@@ -8,7 +8,8 @@ import ModalUnsubscribe from './ModalUnsubscribe';
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
     const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, userId, spotId, spotName, trackLevel, setDate,
-            setDateEnd, setDriver, setPrice, setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock } = useContext(ridersAppContext);
+            setDateEnd, setDriver, setPrice, setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock, setSpotId,
+            setTrackLevel, setSpotName, setCoordinates, coordinates } = useContext(ridersAppContext);
 
     const [activeModalEdit, setActiveModalEdit] = useState(false);
     const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
@@ -20,7 +21,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
         navigate(`/${events}`);
     };
 
-    const createEvent = () => {
+    const createEventFunction = () => {
         if(date === ''){
             callbackWrongField('date');
         }else if(dateEnd === ''){
@@ -125,6 +126,8 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
         console.log(trackLevel);
         if(spotName === ''){
             callbackWrongField('name');
+        }else if(coordinates === ''){
+            callbackWrongField('coordinates');
         }else if(!trackLevel.length){
             callbackWrongField('level');
         }else{
@@ -132,7 +135,8 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                 method: 'POST',
                 body: JSON.stringify({
                     name: spotName,
-                    levels: trackLevel
+                    levels: trackLevel,
+                    coordinnates: coordinates
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -140,7 +144,13 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                if(data.error){
+                    console.error(data.error);
+                    navigate(`/${errorPage}`);
+                }else{
+                    resetAll();
+                    setPageEvent(createEvent);
+                }
             })
         }       
     }
@@ -149,7 +159,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
         <div className='d-flex justify-content-center mt-5'>
             <button className='button buttonBottom' onClick={() => {
                 if(event === 'create'){
-                    createEvent();
+                    createEventFunction();
                 }else if(event === 'join'){
                     joinEvent();
                 }else if(event === 'unsubscribe'){
@@ -182,6 +192,10 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
         setMinPlaces(0);
         setMaxPlaces(0);
         setPrivacy('');
+        setSpotId(-1);
+        setTrackLevel([]);
+        setSpotName('');
+        setCoordinates('');
     }
 }
 

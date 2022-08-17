@@ -13,17 +13,11 @@ function AboutEvent() {
     const { eventsList, currentEvent, currentPage, admin } = useContext(ridersAppContext);
     
     const event = eventsList.find((value) => {
-        return value.event_id === currentEvent
+        return value.event_id === currentEvent;
     })
     const vacancy = event.max_participants - event.booked;
     let date = [];
     dateFormatting(date, event);
-
-    console.log(event.booked);
-    console.log(admin);
-    console.log(currentPage === 'myEvents');
-    console.log(event);
-
 
     return (
         <div className='container pe-3 minHeight position-relative'>
@@ -49,7 +43,7 @@ function AboutEvent() {
                     </div>
                 </div>
                 <AboutEventBlock top={'מוביל'} middle={event.admin} bottom={'055 271-8504'}/>
-                <AboutEventBlock top={'מסלול'} middle={'מסלול שחור 💀'} bottom={'מפה'}/>
+                <AboutEventBlock top={'מסלול'} middle={'מסלול שחור 💀'} bottom={'מפה'} coordinates={event.coordinates}/>
 
                 {event.min_participants <= event.booked ? 
                     <div className='col-12 row tripDone mt-3'>

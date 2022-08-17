@@ -1,13 +1,38 @@
 import React, { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
+import { errorPage, myEvents  } from '../../utils/constants';
 import InputEventSmall from './InputEventSmall';
 
 function ModalEdit({ active, setActive }) {
 
-    const { date, dateEnd } = useContext(ridersAppContext);
+    const { date, dateEnd, currentEvent, setPageEvent } = useContext(ridersAppContext);
+
+    let navigate = useNavigate();
 
     const editTime = () => {
-        console.log(date, dateEnd);
+        fetch('http://www.snowsolutions.me/api/time_update',{
+            method: 'PUT',
+            body: JSON.stringify({
+                event_id: currentEvent,
+                time_start: date,
+                time_end: dateEnd
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 0){
+                setActive(false);
+                setPageEvent(myEvents);
+            }else if(data.status === 1){
+                console.error('Data Base error');
+                setActive(false);
+                navigate(`/${errorPage}`);
+            }
+        })
     }
 
     return (

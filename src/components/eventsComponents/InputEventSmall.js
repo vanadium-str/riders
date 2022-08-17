@@ -3,10 +3,20 @@ import { ridersAppContext } from '../../utils/context';
 
 function InputEventSmall({ type, name, explanation, content, empty }) {
 
-    const { setMaxPlaces, setMinPlaces, date, setDate, setDateEnd } = useContext(ridersAppContext);
+    const { setMaxPlaces, setMinPlaces, date, setDate, setDateEnd, eventsList, currentEvent } = useContext(ridersAppContext);
+
+    const eventCurrent = eventsList.find((value) => {
+        return value.event_id === currentEvent
+    })
 
     function setTime(event, start){
-        if(date){
+        if(content === 'timeStartEdit' || content === 'timeEndEdit'){
+            let timeArray = event.split(':');
+            let newDate = new Date(eventCurrent.time_start);
+            newDate.setHours(timeArray[0]);
+            newDate.setMinutes(timeArray[1]);
+            start ? setDate(newDate) : setDateEnd(newDate);
+        }else if(date){
             let timeArray = event.split(':');
             let newDate = new Date(date);
             newDate.setHours(timeArray[0]);

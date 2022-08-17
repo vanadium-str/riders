@@ -46,7 +46,7 @@ function CreateEvent() {
             <div className='row justify-content-center'>
                 {spotsList.map((item) => {
                     return(
-                        <Location name={item.name} id={item.spot_id}/>
+                        <Location name={item.name} id={item.spot_id} coordinates={item.coordinates}/>
                     );
                 })}
             </div>

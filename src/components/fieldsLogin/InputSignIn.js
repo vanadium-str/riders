@@ -1,8 +1,8 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { ridersAppContext } from '../../utils/context';
 import InputMessage from './InputMessage';
 
-function InputSignIn({placeholder, type, content, wrong, wrongMessage, green}) {
+function InputSignIn({ placeholder, type, content, wrong, wrongMessage, green }) {
 
     const {setEmail, setPass, setPassRepeat} = useContext(ridersAppContext);
 
@@ -21,7 +21,7 @@ function InputSignIn({placeholder, type, content, wrong, wrongMessage, green}) {
     return (
         <div className='col-12 d-flex align-items-center flex-column heightInput'>
             <div className='inputSize position-relative'>
-                {type === 'password'? 
+                {type === 'password' ? 
                     <div className={`passwordView ${showPass ?'view' : ''}`} onClick={() => {
                         showPass ? setShowPass(false) : setShowPass(true);
                     }}/>

@@ -4,7 +4,8 @@ import { ridersAppContext } from '../../utils/context';
 
 function FooterUser() {
 
-    const {currentBlock, setCurrentBlock, setPageEvent} = useContext(ridersAppContext);
+    const { currentBlock, setPageEvent, setDate, setDateEnd, setDriver, setPrice, setMinPlaces, setMaxPlaces, setPrivacy, setCurrentBlock,
+        setSpotId, setTrackLevel, setSpotName, setCoordinates } = useContext(ridersAppContext);
 
     return(
         <div className='container-fluid eventsSwitch'>
@@ -12,6 +13,7 @@ function FooterUser() {
                 <div className={`col-6 d-flex justify-content-center align-items-center
                             ${currentBlock === 'allTrips' ? 'activeEventsSwitchButton' : ''}`}
                             onClick={() => {
+                                resetAll();
                                 setCurrentBlock('allTrips');
                                 setPageEvent('');
                             }}>
@@ -20,6 +22,7 @@ function FooterUser() {
                 <div className={`col-6 d-flex justify-content-center align-items-center
                             ${currentBlock === 'myRuns' ? 'activeEventsSwitchButton': ''}`}
                             onClick={() => {
+                                resetAll();
                                 setCurrentBlock('myRuns');
                                 setPageEvent(myRuns);
                             }}>
@@ -28,6 +31,20 @@ function FooterUser() {
             </div>
         </div>
     )
+
+    function resetAll(){
+        setDate('');
+        setDateEnd('');
+        setDriver('');
+        setPrice('');
+        setMinPlaces(0);
+        setMaxPlaces(0);
+        setPrivacy('');
+        setSpotId(-1);
+        setTrackLevel([]);
+        setSpotName('');
+        setCoordinates('');
+    }
 }
 
 export default FooterUser;

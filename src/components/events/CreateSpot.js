@@ -7,7 +7,7 @@ import Tracks from '../eventsComponents/Tracks';
 
 function CreateSpot() {
 
-    const { spotName, setSpotName } = useContext(ridersAppContext);
+    const { setCoordinates, setSpotName } = useContext(ridersAppContext);
 
     const [emptyField, setEmptyField] = useState('');
 
@@ -24,9 +24,12 @@ function CreateSpot() {
                         onChange={(event) => {
                             setSpotName(event.target.value);
                     }}/>
-                    <div className='map colorBlue'>
-                        מפה
-                    </div>
+                </div>
+                <div className='col-12 d-flex justify-content-center position-relative'>
+                    <input className={`inputSignIn text-end ltr ${emptyField === 'coordinates' ? 'inputWrong' : ''}`}
+                        type='text' placeholder='32.609889, 35.122237: מיקום' onChange={(event) => {
+                            setCoordinates(event.target.value);
+                    }}/>
                 </div>
             </div>
             <div className='row mt-5'>

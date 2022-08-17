@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Routes } from "react-router-dom";
 import { ridersAppContext } from '../utils/context';
-import { alreadyJoin, errorPage, events, joinFailure, joinSuccess, registration, unsubscribeSuccess, waitingList } from '../utils/constants';
+import { alreadyJoin, editPersonalData, errorPage, events, joinFailure, joinSuccess, personalArea, registration, unsubscribeSuccess, waitingList } from '../utils/constants';
 import Registration from './login/Registration';
 import PageConstructor from './PageConstructor';
 import StartPage from './login/StartPage';
@@ -13,6 +13,8 @@ import WaitingSuccess from './events/WaitingSuccess';
 import UnsubscribeSuccess from './events/UnsubscribeSuccess';
 import AlreadyJoin from './events/AlreadyJoin';
 import ErrorPage from './events/ErrorPage';
+import PersonalData from './personalArea/PersonalData';
+import EditPersonalData from './personalArea/EditPersonalData';
 
 function SwitchPage() {
     
@@ -34,6 +36,8 @@ function SwitchPage() {
             <Route path={`/${unsubscribeSuccess}`} element={<UnsubscribeSuccess/>} exact/>
             <Route path={`/${alreadyJoin}`} element={<AlreadyJoin/>} exact/>
             <Route path={`/${errorPage}`} element={<ErrorPage/>} exact/>
+            <Route path={`/${personalArea}`} element={userId === -1 ? <StartPage/> : <PersonalData/>} exact/>
+            <Route path={`/${editPersonalData}`} element={userId === -1 ? <StartPage/> : <EditPersonalData/>} exact/>
             <Route path={`/`} element={<StartPage/>} exact/>
         </Routes>
     );

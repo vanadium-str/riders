@@ -12,6 +12,8 @@ export const waitingList = 'waitingList';
 export const unsubscribeSuccess = 'unsubscribe';
 export const alreadyJoin = 'alreadyJoin';
 export const errorPage = 'error';
+export const personalArea = 'personalArea';
+export const editPersonalData = 'editPersonalData';
 
 const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט',
         'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
@@ -47,6 +49,18 @@ export function joinSuccessDate(date){
         let month = months[dateFormat.getMonth()];
         return `${day} ${dateFormat.getDate()} ל${month} ${time}`
 }
+
+const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+export function isEmailValid(value) {
+        return EMAIL_REGEXP.test(value);
+}
+
+let url = 'https://www.waze.com/ru/live-map/directions?to=ll.';
+export function createLink(coordinates){
+    let array = coordinates.split(', ');
+    return url + array[0] + '%2C' + array[1];
+}
+
 
 // export function swap(items, firstIndex, secondIndex){
 //     const temp = items[firstIndex];
