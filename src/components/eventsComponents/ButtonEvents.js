@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent } from '../../utils/constants';
+import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ModalEdit from '../eventsComponents/ModalEdit';
 import ModalUnsubscribe from './ModalUnsubscribe';
@@ -35,7 +35,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
         }else if(maxPlaces === 0){
             callbackWrongField('maxPlaces');
         }else{
-            fetch('http://www.snowsolutions.me/api/create_event',{
+            fetch(URL + 'create_event',{
                 method: 'POST',
                 body: JSON.stringify({
                     driver_name: driver,
@@ -67,7 +67,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
     }
 
     const joinEvent = () => {
-        fetch('http://www.snowsolutions.me/api/join_event',{
+        fetch(URL + 'join_event',{
             method: 'POST',
             body: JSON.stringify({
                 event_id: currentEvent,
@@ -97,7 +97,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
     }
 
     const joinWaiting = () => {
-        fetch('http://www.snowsolutions.me/api/join_waiting',{
+        fetch(URL + 'join_waiting',{
             method: 'POST',
             body: JSON.stringify({
                 event_id: currentEvent,
@@ -131,7 +131,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
         }else if(!trackLevel.length){
             callbackWrongField('level');
         }else{
-            fetch('http://www.snowsolutions.me/api/create_spot',{
+            fetch(URL + 'create_spot',{
                 method: 'POST',
                 body: JSON.stringify({
                     name: spotName,

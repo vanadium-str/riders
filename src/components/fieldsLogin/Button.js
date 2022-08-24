@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { events } from '../../utils/constants';
+import { events, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function Button({name, login, callbackWrongMessage}) {
@@ -14,7 +14,7 @@ function Button({name, login, callbackWrongMessage}) {
     };
 
     const loginCheck = () => {
-        fetch('http://www.snowsolutions.me/api/login', {
+        fetch(URL + 'login', {
                 method: 'POST',
                 body: JSON.stringify({
                 email: email,
@@ -40,7 +40,7 @@ function Button({name, login, callbackWrongMessage}) {
         if(email === ''){
             callbackWrongMessage(0);
         }else if(pass === passRepeat && pass !== '' && passRepeat !== ''){
-            fetch('http://www.snowsolutions.me/api/register', {
+            fetch(URL + 'register', {
                 method: 'POST',
                 body: JSON.stringify({
                     email: email,

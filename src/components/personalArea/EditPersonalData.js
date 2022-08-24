@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
-import { errorPage, personalArea } from '../../utils/constants';
+import { errorPage, personalArea, URL } from '../../utils/constants';
 import InputChangePass from './InputChangePass';
 
 function EditPersonalData() {
@@ -18,7 +18,7 @@ function EditPersonalData() {
         console.log(userId)
         console.log(pass)
         console.log(oldPass)
-        fetch('http://www.snowsolutions.me/api/user_update', {
+        fetch(URL + 'user_update', {
             method: 'PUT',
             body: JSON.stringify({
               user_id: userId,
@@ -63,11 +63,13 @@ function EditPersonalData() {
                         navigate(`/${personalArea}`);
                     }}/>
                 </div>
-                <InputChangePass name={'סיסמה נוכחית'} content={'oldPass'} callbackSetPass={callbackSetPass}
-                                    wrong={wrongOldPass} wrongMessage={'הזנה שגויה'}/>
-                <InputChangePass name={'סיסמה חדשה'} content={'newPass'} callbackSetPass={callbackSetPass} wrong={wrongNewPass}/>
-                <InputChangePass name={'הזנה'} content={'repeatPass'} callbackSetPass={callbackSetPass}
-                                wrong={wrongNewPass} wrongMessage={'הזנה שגויה'}/>
+                <div className='d-flex flex-column align-items-center'>
+                    <InputChangePass name={'סיסמה נוכחית'} content={'oldPass'} callbackSetPass={callbackSetPass}
+                                        wrong={wrongOldPass} wrongMessage={'הזנה שגויה'}/>
+                    <InputChangePass name={'סיסמה חדשה'} content={'newPass'} callbackSetPass={callbackSetPass} wrong={wrongNewPass}/>
+                    <InputChangePass name={'הזנה'} content={'repeatPass'} callbackSetPass={callbackSetPass}
+                                    wrong={wrongNewPass} wrongMessage={'הזנה שגויה'}/>
+                </div>
             </div>
 
             <div className='d-flex justify-content-center mt-5'>

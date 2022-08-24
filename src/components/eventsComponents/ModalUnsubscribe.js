@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { unsubscribeSuccess } from '../../utils/constants';
+import { unsubscribeSuccess, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function ModalUnsubscribe({ active, setActive }) {
@@ -10,7 +10,7 @@ function ModalUnsubscribe({ active, setActive }) {
     let navigate = useNavigate();
 
     const unsubscribe = () => {
-        fetch('http://www.snowsolutions.me/api/leave_event',{
+        fetch(URL + 'leave_event',{
             method: 'POST',
             body: JSON.stringify({
                 event_id: currentEvent,

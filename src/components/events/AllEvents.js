@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { dateFormatting, dateTorender } from '../../utils/constants';
+import { dateFormatting, dateTorender, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import EventElement from './EventElement';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
@@ -12,7 +12,7 @@ function AllEvents() {
     let dates = [];
 
     useEffect(() => {
-        fetch('http://www.snowsolutions.me/api/runs')
+        fetch(URL + 'runs')
             .then(response => response.json())
             .then(data => {
                 setEventsList(data);

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ridersAppContext } from '../../utils/context';
-import { createSpot, myEvents } from '../../utils/constants';
+import { createSpot, myEvents, URL } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
 import InputEvent from '../eventsComponents/InputEvent';
 import InputEventSmall from '../eventsComponents/InputEventSmall';
@@ -19,7 +19,7 @@ function CreateEvent() {
     }
 
     useEffect(() => {
-        fetch('http://www.snowsolutions.me/api/spots')
+        fetch(URL + 'spots')
         .then(response => response.json())
         .then(data => {
             console.log(data);

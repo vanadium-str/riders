@@ -19,6 +19,8 @@ const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 
         'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
 const week = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'שבת'];
 
+export const URL = 'https://www.snowsolutions.me/api/';
+
 export function dateFormatting(date, item){
         let dateFormat = new Date(item.time_start);
         date.push(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}`)

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { createEvent, dateFormatting, dateTorender } from '../../utils/constants';
+import { createEvent, dateFormatting, dateTorender, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
@@ -13,7 +13,7 @@ function MyEvents() {
     let dates = [];
 
     useEffect(() => {
-        fetch('http://www.snowsolutions.me/api/mycreated', {
+        fetch(URL + 'mycreated', {
             method: 'POST',
             body: JSON.stringify({
               user_id: userId

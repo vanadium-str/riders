@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { ridersAppContext } from '../../utils/context';
 import { TbTrash } from "react-icons/tb";
+import { URL } from '../../utils/constants';
 
 function RidersList({ booked, max, eventId}) {
 
     const { ridersList, setRidersList, admin, currentPage } = useContext(ridersAppContext);
 
     useEffect(() => {
-        fetch('http://www.snowsolutions.me/api/participants_list', {
+        fetch(URL + 'participants_list', {
             method: 'POST',
             body: JSON.stringify({
                 event_id: eventId

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
-import { errorPage, myEvents  } from '../../utils/constants';
+import { errorPage, myEvents, URL  } from '../../utils/constants';
 import InputEventSmall from './InputEventSmall';
 
 function ModalEdit({ active, setActive }) {
@@ -11,7 +11,7 @@ function ModalEdit({ active, setActive }) {
     let navigate = useNavigate();
 
     const editTime = () => {
-        fetch('http://www.snowsolutions.me/api/time_update',{
+        fetch(URL + 'time_update',{
             method: 'PUT',
             body: JSON.stringify({
                 event_id: currentEvent,

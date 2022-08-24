@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
-import { editPersonalData, events } from '../../utils/constants';
+import { editPersonalData, events, URL } from '../../utils/constants';
 
 function PersonalData() {
 
@@ -11,7 +11,7 @@ function PersonalData() {
     let navigate = useNavigate();
     
     useEffect(() => {
-        fetch('http://www.snowsolutions.me/api/user_info', {
+        fetch(URL + 'user_info', {
             method: 'POST',
             body: JSON.stringify({
               user_id: userId
