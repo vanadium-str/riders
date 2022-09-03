@@ -31,11 +31,10 @@ function StartPage() {
         <div className='container my-3'>
             <Header name={'כניסה'} back={false}/>
             <div className='row mt-5'>
-                <InputSignIn placeholder={'מייל'} type={'email'} content={'email'} wrong={wrongMail} wrongMessage={wrongMessage}/>
+                <InputSignIn placeholder={'מייל או טלפון'} type={'text'} content={'login'} wrong={wrongMail} wrongMessage={wrongMessage}/>
                 <InputSignIn placeholder={'סיסמה'}  type={'password'} content={'pass'} wrong={wrongPass} wrongMessage={wrongMessage}/>              
                 <Button name={'כניסה'} login={true} callbackWrongMessage={callbackWrongMessage}/>
             </div>
-            <SocialMedia/>
             <div className='text-end mt-4 pe-3 fontSizeMedium'>
                 <Link to={`/${registration}`} className='colorBlue cursor' onClick={() => {
                     setPass('');

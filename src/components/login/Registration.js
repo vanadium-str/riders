@@ -13,10 +13,15 @@ function Registration() {
     const [wrongGreen, setWrongGreen] = useState(false);
     const [wrongMessage, setWrongMessage] = useState('');
 
-    const setWrongInput = () => {
+    const setWrongPass = () => {
         if(pass !== '' && passRepeat !== '' && pass !== passRepeat){
             return true
         }
+    }
+
+    const setWrongName = () => {
+        setWrongMessage('שדה חובה');
+        return true;
     }
 
     const callbackWrongMessage = (message) => {
@@ -27,19 +32,26 @@ function Registration() {
             setWrongMessage('משתמש עם המייל הזה כבר נרשם באפליקציה');
             setWrongGreen(true);
             setWrong(true);
+        }else if(message === 'phone'){
+            //TODO
+        }else if(message === 'username'){
+            //setWrongName();
+        }else if(message === 'mailType'){
+            //TODO
         }
     }
 
     return (
         <div className='container my-3'>
             <Header name={'הרשמה'} back={true}/>
-            <div className='row mt-5'>
+            <div className='row mt-4'>
                 <InputSignIn placeholder={'מייל'} type={'email'} content={'email'} green={wrongGreen} wrong={wrong} wrongMessage={wrongMessage}/>
-                <InputSignIn placeholder={'סיסמה'} type={'password'} content={'firstPass'} wrong={setWrongInput()}/>
-                <InputSignIn placeholder={'הזנה'} type={'password'} content={'secondPass'} wrong={setWrongInput()} wrongMessage={'הזנה שגויה'}/>
+                <InputSignIn placeholder={'טלפון'} type={'number'} content={'phone'}/>
+                <InputSignIn placeholder={'שם פרטי'} type={'text'} content={'name'}/>
+                <InputSignIn placeholder={'סיסמה'} type={'password'} content={'firstPass'} wrong={setWrongPass()}/>
+                <InputSignIn placeholder={'הזנה'} type={'password'} content={'secondPass'} wrong={setWrongPass()} wrongMessage={'הזנה שגויה'}/>
                 <Button name={'הרשמה'} login={false} callbackWrongMessage={callbackWrongMessage}/>
             </div>
-            <SocialMedia/>
         </div>
     );
 }

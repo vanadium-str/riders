@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { events, URL } from '../../utils/constants';
+import { events, URL, isEmailValid } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function Button({name, login, callbackWrongMessage}) {
 
-    const { email, pass, passRepeat, setUserId, setAdmin } = useContext(ridersAppContext);
+    const { email, username, phone, pass, passRepeat, setUserId, setAdmin } = useContext(ridersAppContext);
 
     let navigate = useNavigate();
 
@@ -39,11 +39,22 @@ function Button({name, login, callbackWrongMessage}) {
     const registration = () => {
         if(email === ''){
             callbackWrongMessage(0);
-        }else if(pass === passRepeat && pass !== '' && passRepeat !== ''){
+        }else if(username === ''){
+            //callbackWrongMessage('username');
+            alert('Please add name')
+        }else if(phone === ''){
+            //callbackWrongMessage('phone');
+            alert('Please add phone')
+        }else if(!isEmailValid(email)){
+            //callbackWrongMessage('mailType');
+            alert('Your email is incorrect')
+        }else if(pass === passRepeat && pass !== '' && passRepeat !== '' && isEmailValid(email)){
             fetch(URL + 'register', {
                 method: 'POST',
                 body: JSON.stringify({
                     email: email,
+                    name: username,
+                    phone: phone,
                     password: pass
                 }),
                     headers: {

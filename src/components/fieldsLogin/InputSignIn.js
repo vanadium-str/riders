@@ -4,7 +4,7 @@ import InputMessage from './InputMessage';
 
 function InputSignIn({ placeholder, type, content, wrong, wrongMessage, green }) {
 
-    const {setEmail, setPass, setPassRepeat} = useContext(ridersAppContext);
+    const { setEmail, setPass, setPassRepeat, setPhone, setUsername } = useContext(ridersAppContext);
 
     const [showPass, setShowPass] = useState(false);
 
@@ -15,6 +15,12 @@ function InputSignIn({ placeholder, type, content, wrong, wrongMessage, green })
             setPassRepeat(event);
         }else if(content === 'email'){
             setEmail(event);
+        }else if(content === 'login'){
+            setEmail(event);
+        }else if(content === 'name'){
+            setUsername(event);
+        }else if(content === 'phone'){
+            setPhone(event);
         }
     }
 

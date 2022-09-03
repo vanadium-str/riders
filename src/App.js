@@ -14,6 +14,8 @@ function App() {
   const [spotsList, setSpotsList] = useState([]);
   const [admin, setAdmin] = useState(1);
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [username, setUsername] = useState('');
   const [pass, setPass] = useState('');
   const [passRepeat, setPassRepeat] = useState('');
   const [userId, setUserId] = useState(-1);
@@ -40,7 +42,8 @@ function App() {
           passRepeat, setPassRepeat, email, setEmail, userId, setUserId, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
           maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, myRuns, setMyRuns, currentEvent, setCurrentEvent, myEvents,
           setMyEvents, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
-          setTrackLevel, spotName, setSpotName, userData, setUserData, coordinates, setCoordinates, oldPass, setOldPass }
+          setTrackLevel, spotName, setSpotName, userData, setUserData, coordinates, setCoordinates, oldPass, setOldPass, phone, setPhone,
+          username, setUsername }
       }>
         <SwitchPage/>
       </ridersAppContext.Provider>

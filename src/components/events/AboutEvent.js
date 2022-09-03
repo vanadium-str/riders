@@ -60,7 +60,7 @@ function AboutEvent() {
                     <RidersList booked={event.booked} max={event.max_participants} eventId={event.event_id}/>
                 : <></>}
                 
-                {currentPage === 'allEvents' ? <ButtonEvents name={'הלמן'} event={'join'}/>
+                {currentPage === 'allEvents' ? <ButtonEvents name={'הזמן'} event={'join'}/>
                 : currentPage === 'myRuns' 
                     ? <ButtonEvents name={'בטל'} event={'unsubscribe'}/> 
                     : <ButtonEvents name={'שינוי זמן'} event={'edit'}/>                   
