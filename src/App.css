@@ -44,6 +44,9 @@ a:visited {
 .smallText{
     font-size: 12px;
 }
+.textLarge{
+    font-size: 18px;
+}
 .colorGrey{
     color: #858686;
 }
@@ -59,13 +62,13 @@ a:visited {
     position: sticky;
     bottom: 0;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 16px;
     background-color: #F7F9FA;
 }
 .activeEventsSwitchButton{
     background: radial-gradient(50% 50% at 50% 50%, #D2FF4D 0%, #F7F9FA 73.44%);
     font-weight: bold;
-    min-height: 35px;
+    min-height: 45px;
 }
 .mediumTitle{
     font-weight: 700;
@@ -204,7 +207,7 @@ a:visited {
 }
 .buttonBottom{
     position: fixed;
-    bottom: 40px;
+    bottom: 50px;
     cursor: pointer;
 }
 .inputWrong{

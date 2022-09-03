@@ -18,7 +18,7 @@ function StartPage() {
     const callbackWrongMessage = (message) => {
         if(message === 1){
             setWrongPass(false);
-            setWrongMessage('המייל הזה לא נרשמ באפליקציה');
+            setWrongMessage('הטלפון הזה לא נרשמ באפליקציה');
             setWrongMail(true);
         }else if(message === 2){
             setWrongMail(false);
@@ -30,17 +30,17 @@ function StartPage() {
     return (
         <div className='container my-3'>
             <Header name={'כניסה'} back={false}/>
-            <div className='row mt-5'>
-                <InputSignIn placeholder={'מייל או טלפון'} type={'text'} content={'login'} wrong={wrongMail} wrongMessage={wrongMessage}/>
-                <InputSignIn placeholder={'סיסמה'}  type={'password'} content={'pass'} wrong={wrongPass} wrongMessage={wrongMessage}/>              
-                <Button name={'כניסה'} login={true} callbackWrongMessage={callbackWrongMessage}/>
-            </div>
-            <div className='text-end mt-4 pe-3 fontSizeMedium'>
+            <div className='text-end mt-3 me-4 textLarge'>
                 <Link to={`/${registration}`} className='colorBlue cursor' onClick={() => {
                     setPass('');
                 }}>
                     להרשמה
                 </Link>
+            </div>
+            <div className='row mt-5'>
+                <InputSignIn placeholder={'טלפון'} type={'number'} content={'phone'} wrong={wrongMail} wrongMessage={wrongMessage}/>
+                <InputSignIn placeholder={'סיסמה'}  type={'password'} content={'pass'} wrong={wrongPass} wrongMessage={wrongMessage}/>              
+                <Button name={'כניסה'} login={true} callbackWrongMessage={callbackWrongMessage}/>
             </div>
         </div>
     );

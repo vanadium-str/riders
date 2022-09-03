@@ -15,8 +15,6 @@ function InputSignIn({ placeholder, type, content, wrong, wrongMessage, green })
             setPassRepeat(event);
         }else if(content === 'email'){
             setEmail(event);
-        }else if(content === 'login'){
-            setEmail(event);
         }else if(content === 'name'){
             setUsername(event);
         }else if(content === 'phone'){

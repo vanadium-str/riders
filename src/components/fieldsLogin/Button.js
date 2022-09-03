@@ -17,7 +17,7 @@ function Button({name, login, callbackWrongMessage}) {
         fetch(URL + 'login', {
                 method: 'POST',
                 body: JSON.stringify({
-                email: email,
+                phone: phone,
                 password: pass
                 }),
                 headers: {

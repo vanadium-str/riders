@@ -70,9 +70,7 @@ function MyEvents() {
                         לא נמצאים הקפצות
                     </div>
                 }
-                <div className='buttonBottom'>
-                    <ButtonEvents name={'+'} page={createEvent}/>
-                </div>
+                <ButtonEvents name={'+'} page={createEvent}/>
             </div>
         </div>
     );

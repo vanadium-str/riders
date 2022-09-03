@@ -14,11 +14,11 @@ function HeaderEvent({name, back, page}) {
     return (
         <div className='row'>
             {back ? <></> : 
-            <div className='col-6 d-flex align-items-center cursor ps-4'
+            <div className='col-4 d-flex align-items-center cursor ps-4'
                 onClick={() => navigate(`/${personalArea}`)}>
                 🙂
             </div>}
-            <div className={`${back ? 'col-12 mediumTitle mb-5 mt-2' : 'col-6 pageTitle'}`}>
+            <div className={`${back ? 'col-12 mediumTitle mb-5 mt-2' : 'col-8 pageTitle'}`}>
                 {name} {back ? <img src={arrow} className='cursor' onClick={() => {
                         if(page === 'events'){
                             setCurrentBlock('allTrips');
