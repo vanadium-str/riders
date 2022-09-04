@@ -31,7 +31,7 @@ function AllEvents() {
             <HeaderEvent name={'הקפצות'} back={false}/>
             <div className='row-reverse'>
 
-                {eventsList.length ? uniqueDates.map((item) => {
+                {eventsList.length ? uniqueDates.map((item, key) => {
                     function filter (data){
                         let dateFormat = new Date(data.time_start);
                         if(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}` === item){
@@ -46,7 +46,7 @@ function AllEvents() {
                             <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
                                 {dateTorender(item)}
                             </div>
-                            {sortedEvents.map((event) => {
+                            {sortedEvents.map((event, key) => {
                                 return(
                                     <EventElement event={event} page={'allEvents'}/>
                                 )

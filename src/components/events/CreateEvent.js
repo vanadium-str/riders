@@ -62,7 +62,7 @@ function CreateEvent() {
                 </div>    
                 : <></>}
 
-                <InputEvent type={'text'} name={'נהג'} content={'driver'} empty={emptyField === 'driver' ? true : false}/>
+                <InputEvent type={'text'} name={'נהג'} content={'driver'}/>
                 <InputEvent type={'number'} name={'₪ מחיר'} content={'price'} empty={emptyField === 'price' ? true : false}/>
             </div>
             <div className='row justify-content-center mb-4'>

@@ -3,13 +3,11 @@ import { ridersAppContext } from '../../utils/context';
 
 function InputEvent({ type, name, content, empty }) {
 
-    const { setDate, setDriver, setPrice } = useContext(ridersAppContext);
+    const { setDate, driver, setPrice } = useContext(ridersAppContext);
 
     const typeDefinition = (event) => {
         if(content === 'date'){
             setDate(event);
-        }else if(content === 'driver'){
-            setDriver(event);
         }else if(content === 'price'){
             setPrice(event);
         }
@@ -17,8 +15,9 @@ function InputEvent({ type, name, content, empty }) {
     
     return (
         <div className='col-12 d-flex justify-content-center'>
-            <input className={`inputSignIn text-end ltr ${empty ? 'inputWrong' : ''}`} type={type} placeholder={name} onChange={(event) => {
-                typeDefinition(event.target.value);
+            <input className={`inputSignIn text-end ltr ${empty ? 'inputWrong' : ''}`} type={type} placeholder={name}
+                value={content === 'driver' ? driver : ''} disabled={content === 'driver'} onChange={(event) => {
+                    typeDefinition(event.target.value);
             }}/>
         </div>
     );

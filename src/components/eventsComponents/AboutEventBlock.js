@@ -1,22 +1,38 @@
 import { createLink } from "../../utils/constants";
 
-function AboutEventBlock({ top, middle, bottom, coordinates }) {
+function AboutEventBlock({ top, middle, bottom, levels, coordinates }) {
 
   return (
     <div className='col-6 mt-2'>
       <div className='colorGrey smallText'>
         {top}
       </div>
-      <div className=''>
-        {middle}
-      </div>
-      <div className='colorBlue' onClick={() => {
-        if(bottom === 'מפה'){
-          window.open(createLink(coordinates));
-        }
-      }}>
-        {bottom}
-      </div>
+
+      {middle ? 
+        <div>
+          {middle}
+        </div>
+      :
+        levels.map((item, key) => {
+          return (
+            <div>
+              {item === 0 ? 'מתחילים 😚' : (item === 1 ? 'מתקדמים 😈' : 'מקצוענים 💀')}
+            </div>
+          )
+        })
+      }
+
+      {bottom ? 
+        <div className='colorBlue'>
+          <div>
+            {bottom}
+          </div>
+          <div className="cursor" onClick={() => window.open(createLink(coordinates))}>
+            איך להגיע
+          </div>
+        </div>         
+      : <></>}
+
     </div>
   );
 }

@@ -26,8 +26,8 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             callbackWrongField('date');
         }else if(dateEnd === ''){
             callbackWrongField('dateEnd');
-        }else if(driver === ''){
-            callbackWrongField('driver');
+        }else if(spotId === -1){
+            alert('Please, choose spot');
         }else if(price === ''){
             callbackWrongField('price');
         }else if(minPlaces === 0){
@@ -187,7 +187,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
     function resetAll(){
         setDate('');
         setDateEnd('');
-        setDriver('');
+        //setDriver('');
         setPrice('');
         setMinPlaces(0);
         setMaxPlaces(0);

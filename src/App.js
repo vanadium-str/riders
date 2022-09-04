@@ -21,7 +21,7 @@ function App() {
   const [userId, setUserId] = useState(-1);
   const [date, setDate] = useState('');
   const [dateEnd, setDateEnd] = useState('');
-  const [driver, setDriver] = useState('');
+  const [driver, setDriver] = useState('יתאן');
   const [price, setPrice] = useState('');
   const [minPlaces, setMinPlaces] = useState(0);
   const [maxPlaces, setMaxPlaces] = useState(0);

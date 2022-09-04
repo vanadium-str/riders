@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ridersAppContext } from '../../utils/context';
 import example from '../../images/example.jpg';
 import AboutEventBlock from '../eventsComponents/AboutEventBlock';
-import { TbCaravan, TbCheck } from "react-icons/tb";
+import { TbCaravan, TbCheck, TbTrash } from "react-icons/tb";
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import { dateFormatting, dateTorender, events, timeToRender } from '../../utils/constants';
@@ -42,8 +42,8 @@ function AboutEvent() {
                         {timeToRender(event.time_start)} - {timeToRender(event.time_end)}
                     </div>
                 </div>
-                <AboutEventBlock top={'מוביל'} middle={event.admin} bottom={'055 271-8504'}/>
-                <AboutEventBlock top={'מסלול'} middle={'מסלול שחור 💀'} bottom={'מפה'} coordinates={event.coordinates}/>
+                <AboutEventBlock top={'מוביל'} middle={event.admin} bottom={'055 271-8504'} coordinates={event.coordinates}/>
+                <AboutEventBlock top={'מסלול'} levels={event.levels}/>
 
                 {event.min_participants <= event.booked ? 
                     <div className='col-12 row tripDone mt-3'>
@@ -63,7 +63,13 @@ function AboutEvent() {
                 {currentPage === 'allEvents' ? <ButtonEvents name={'הזמן'} event={'join'}/>
                 : currentPage === 'myRuns' 
                     ? <ButtonEvents name={'בטל'} event={'unsubscribe'}/> 
-                    : <ButtonEvents name={'שינוי זמן'} event={'edit'}/>                   
+                    : 
+                    <div className=''>
+                        <ButtonEvents name={'שינוי זמן'} event={'edit'}/>
+                        {/* <div>
+                            <TbTrash/>
+                        </div> */}
+                    </div>                 
                 }
                 
 

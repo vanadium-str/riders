@@ -30,14 +30,14 @@ function EventElement({ event, page }) {
                 </div>
                 {event.waiting ? 
                     <div className='col-2'>
-                        <NumberOfSeats number={event.waiting} name={'בהמתנה'} big={true}/>
+                        <NumberOfSeats number={event.waiting} name={'בהמתנה'}/>
                     </div>            
                 : <></>}
                 <div className={`${event.waiting ? 'col-6' : 'col-8'}`}>
                    <PlaceAndTime place={event.spot} timeFrom={timeToRender(event.time_start)}
                     timeTo={timeToRender(event.time_end)} done={event.booked >= event.min_participants ? true : false}/>
                 </div>
-                <div className={`col-9 text-start ps-3 smallText ${event.is_private ? 'colorRed' : 'colorBlue'}`}>
+                <div className={`col-9 text-start ps-3 smallText ${event.is_private ? 'colorRed' : 'colorBlue mediumBoldText'}`}>
                     {event.is_private ? 'אירוע פרטי, לא ניתן להצטרף' : 'תצטרפו'}
                 </div>
                 <div className='col-3 colorGrey'>
