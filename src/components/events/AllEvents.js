@@ -9,9 +9,11 @@ function AllEvents() {
     const { eventsList, setEventsList, userId } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
+    const [loading, setLoading] = useState(false);
     let dates = [];
 
     useEffect(() => {
+       setLoading(true)
         fetch(URL + 'runs')
             .then(response => response.json())
             .then(data => {
@@ -22,6 +24,7 @@ function AllEvents() {
                 });
                 let datesFiltered = dates.filter((value, index, array) => array.indexOf(value) === index);
                 setUniqueDates(datesFiltered);
+                setLoading(false)
             }
         );
     }, []);
@@ -29,6 +32,13 @@ function AllEvents() {
     return (
         <div className='container py-3 minHeight'>
             <HeaderEvent name={'הקפצות'} back={false}/>
+
+            {loading ? 
+                <div className='d-flex justify-content-center mt-5'>
+                    <div class="spinner-border" role="status"/>
+                </div>
+            : <></>}
+
             <div className='row-reverse'>
 
                 {eventsList.length ? uniqueDates.map((item, key) => {

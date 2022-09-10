@@ -21,6 +21,17 @@ const week = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'שבת'];
 
 export const URL = 'https://www.snowsolutions.me/api/';
 
+export const phoneCodes = [ "050", "051", "052", "053", "054", "055", "056", "058", "059" ];
+
+export function matchPhoneCodes(phone){
+        for(let i = 0; i < phoneCodes.length; i++){
+                if(phone.startsWith(phoneCodes[i])){
+                        return true;
+                }
+        }
+        return false;
+}
+
 export function dateFormatting(date, item){
         let dateFormat = new Date(item.time_start);
         date.push(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}`)

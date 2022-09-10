@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import { TbCaravan } from "react-icons/tb";
 import { aboutEvent, timeToRender } from '../../utils/constants';
 import { ridersAppContext } from "../../utils/context";
@@ -7,16 +8,17 @@ import PlaceAndTime from '../eventsComponents/PlaceAndTime';
 
 function EventElement({ event, page }) {
 
-    const { setPageEvent, setCurrentEvent, admin, setCurrentPage } = useContext(ridersAppContext);
+    const { setCurrentEvent, admin, setCurrentPage } = useContext(ridersAppContext);
     
     const vacancy = event.max_participants - event.booked;
+    let navigate = useNavigate();
 
     return(
         <div className='container backgroundElement my-1 p-2 cursor' onClick={() => {
             if(event.is_private === 0 || admin === 1){
                 setCurrentEvent(event.event_id);
                 setCurrentPage(page);
-                setPageEvent(aboutEvent);
+                navigate(`/${aboutEvent}/${event.event_id}`);
             }
         }}>
             <div className='row text-end d-flex align-items-end'>

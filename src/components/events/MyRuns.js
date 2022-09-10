@@ -9,6 +9,7 @@ function MyRuns() {
     const { myRuns, setMyRuns, userId } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
+    const [loading, setLoading] = useState(false);
     let dates = [];
 
     useEffect(() => {
@@ -38,6 +39,13 @@ function MyRuns() {
     return (
         <div className='container py-3 minHeight'>
             <HeaderEvent name={'הקפצות'} back={false}/>
+
+            {loading ? 
+                <div className='d-flex justify-content-center mt-5'>
+                    <div class="spinner-border" role="status"/>
+                </div>
+            : <></>}
+            
             <div className='row-reverse'>
                 {myRuns.length ?
 

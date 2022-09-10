@@ -1,27 +1,34 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { useParams } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
 import example from '../../images/example.jpg';
 import AboutEventBlock from '../eventsComponents/AboutEventBlock';
 import { TbCaravan, TbCheck, TbTrash } from "react-icons/tb";
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
-import { dateFormatting, dateTorender, events, timeToRender } from '../../utils/constants';
+import { dateFormatting, dateTorender, timeToRender } from '../../utils/constants';
 import RidersList from '../eventsComponents/RidersList';
+import ModalDeleteEvent from '../eventsComponents/ModalDeleteEvent';
 
 function AboutEvent() {
 
-    const { eventsList, currentEvent, currentPage, admin } = useContext(ridersAppContext);
-    
+    const { eventsList, currentPage, admin } = useContext(ridersAppContext);
+
+    const [activeModalDeleteEvent, setActiveModalDeleteEvent] = useState(false);
+
+    let { idEvent } = useParams();
+
     const event = eventsList.find((value) => {
-        return value.event_id === currentEvent;
+        return value.event_id == idEvent;
     })
-    const vacancy = event.max_participants - event.booked;
+    
     let date = [];
+    const vacancy = event.max_participants - event.booked;
     dateFormatting(date, event);
 
     return (
         <div className='container pe-3 minHeight position-relative'>
-            <HeaderEvent name={event.spot} back={true} page={events}/>
+            <HeaderEvent name={event.spot} back={true} page={'aboutTrip'}/>
             <div className='row text-end fontSizeMedium'>
                 <div className='col-6'>
                     <div className='colorGrey smallText'>
@@ -31,7 +38,7 @@ function AboutEvent() {
                         {event.driver} <TbCaravan/>
                     </div>
                     <div className={`smallText ${vacancy < 4 ? 'colorOrange' : ''} ${vacancy === 0 ? 'colorRed' : ''}`}>
-                        {vacancy} מקומות פנוים
+                        {vacancy === 0 ? event.waiting : vacancy} {vacancy === 0 ? 'בהמתנה' : 'מקומות פנוים'}
                     </div>
                 </div>
                 <div className='col-6'>
@@ -42,7 +49,8 @@ function AboutEvent() {
                         {timeToRender(event.time_start)} - {timeToRender(event.time_end)}
                     </div>
                 </div>
-                <AboutEventBlock top={'מוביל'} middle={event.admin} bottom={'055 271-8504'} coordinates={event.coordinates}/>
+                <AboutEventBlock top={'מוביל'} middle={event.admin}
+                    bottom={'055 271-8504'} coordinates={event.coordinates}/>
                 <AboutEventBlock top={'מסלול'} levels={event.levels}/>
 
                 {event.min_participants <= event.booked ? 
@@ -57,22 +65,25 @@ function AboutEvent() {
                 : <></>}
 
                 {event.booked && admin && currentPage === 'myEvents' ? 
-                    <RidersList booked={event.booked} max={event.max_participants} eventId={event.event_id}/>
+                    <RidersList booked={event.booked}
+                        max={event.max_participants} eventId={event.event_id}/>
                 : <></>}
                 
                 {currentPage === 'allEvents' ? <ButtonEvents name={'הזמן'} event={'join'}/>
                 : currentPage === 'myRuns' 
                     ? <ButtonEvents name={'בטל'} event={'unsubscribe'}/> 
                     : 
-                    <div className=''>
-                        <ButtonEvents name={'שינוי זמן'} event={'edit'}/>
-                        {/* <div>
+                    <div>
+                        <div>
+                            <ButtonEvents name={'שינוי זמן'} event={'edit'}/>
+                        </div>
+                        <div className='buttonBottom deleteButton' onClick={() => setActiveModalDeleteEvent(true)}>
                             <TbTrash/>
-                        </div> */}
+                        </div>
                     </div>                 
                 }
                 
-
+                <ModalDeleteEvent active={activeModalDeleteEvent} setActive={setActiveModalDeleteEvent} event={event}/>
 
                 {/* <div className='col-7 text-start ms-3 colorBlue'>
                     צפו בעוד

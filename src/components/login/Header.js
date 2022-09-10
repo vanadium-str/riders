@@ -19,7 +19,7 @@ function Header({name, back}) {
     return (
         <div className='row d-flex align-items-center px-4'>
             <div className='col-6 logo'>
-                inRideapp
+                <span className='colorGreen fw-bold'>in</span>Rideapp
             </div>
             <div className='col-6 text-end mediumTitle'>
                 {name} {back ? <img src={arrow} className='cursor' onClick={() => {

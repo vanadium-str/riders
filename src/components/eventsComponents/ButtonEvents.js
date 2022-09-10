@@ -1,15 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent, URL } from '../../utils/constants';
+import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent, URL, allEvents } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ModalEdit from '../eventsComponents/ModalEdit';
+import ModalDeleteEvent from './ModalDeleteEvent';
 import ModalUnsubscribe from './ModalUnsubscribe';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
     const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, userId, spotId, spotName, trackLevel, setDate,
             setDateEnd, setDriver, setPrice, setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock, setSpotId,
-            setTrackLevel, setSpotName, setCoordinates, coordinates } = useContext(ridersAppContext);
+            setTrackLevel, setSpotName, setCoordinates, coordinates, setCurrentPage } = useContext(ridersAppContext);
 
     const [activeModalEdit, setActiveModalEdit] = useState(false);
     const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
@@ -34,6 +35,8 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             callbackWrongField('minPlaces');
         }else if(maxPlaces === 0){
             callbackWrongField('maxPlaces');
+        }else if(spotId === -1){
+            alert('Please choose spot');
         }else{
             fetch(URL + 'create_event',{
                 method: 'POST',
@@ -60,7 +63,9 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                 }else{
                     console.log(data);
                     resetAll();
-                    setPageEvent(page);
+                    setCurrentBlock('allTrips');
+                    setPageEvent(allEvents);
+                    navigate(`/${events}`);
                 }
             })
         }       
@@ -149,7 +154,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     navigate(`/${errorPage}`);
                 }else{
                     resetAll();
-                    setPageEvent(createEvent);
+                    navigate(`/${createEvent}`);
                 }
             })
         }       
@@ -172,6 +177,9 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     eventsPage();
                 }else if(event === 'createSpot'){
                     createSpot();
+                }else if(event === 'createEvent'){
+                    setCurrentPage('myEvents');
+                    navigate(`/${createEvent}`);
                 }else{
                     setPageEvent(page);
                 }

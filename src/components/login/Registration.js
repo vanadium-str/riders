@@ -32,12 +32,6 @@ function Registration() {
             setWrongMessage('משתמש עם המייל הזה כבר נרשם באפליקציה');
             setWrongGreen(true);
             setWrong(true);
-        }else if(message === 'phone'){
-            //TODO
-        }else if(message === 'username'){
-            //setWrongName();
-        }else if(message === 'mailType'){
-            //TODO
         }
     }
 

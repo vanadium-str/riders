@@ -10,6 +10,7 @@ function MyEvents() {
     const { userId, myEvents, setMyEvents } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
+    const [loading, setLoading] = useState(false);
     let dates = [];
 
     useEffect(() => {
@@ -39,6 +40,13 @@ function MyEvents() {
     return (
         <div className='container py-3 minHeight position-relative'>
             <HeaderEvent name={'הקפצות שפתחתי'} back={false}/>
+
+            {loading ? 
+                <div className='d-flex justify-content-center mt-5'>
+                    <div class="spinner-border" role="status"/>
+                </div>
+            : <></>}
+            
             <div className='row'>
                 {myEvents.length ?
 
@@ -70,7 +78,7 @@ function MyEvents() {
                         לא נמצאים הקפצות
                     </div>
                 }
-                <ButtonEvents name={'+'} page={createEvent}/>
+                <ButtonEvents name={'+'} event={createEvent}/>
             </div>
         </div>
     );

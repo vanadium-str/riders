@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
 import { createSpot, myEvents, URL } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
@@ -10,9 +11,11 @@ import ButtonEvents from '../eventsComponents/ButtonEvents';
 
 function CreateEvent() {
 
-    const { date, spotsList, setSpotsList, setPageEvent } = useContext(ridersAppContext);
+    const { date, spotsList, setSpotsList } = useContext(ridersAppContext);
 
     const [emptyField, setEmptyField] = useState('');
+
+    let navigate = useNavigate();
 
     const callbackWrongField = (field) => {
         setEmptyField(field);
@@ -29,9 +32,9 @@ function CreateEvent() {
 
     return (
         <div className='container py-3 minHeight'>
-            <HeaderEvent name={'לפתוח הקפצה'} back={true} page={myEvents}/>
+            <HeaderEvent name={'לפתוח הקפצה'} back={true} page={'aboutTrip'}/>
             <div className='row ms-1 mb-3'>
-                <div className='col-6 colorBlue' onClick={() => setPageEvent(createSpot)}>
+                <div className='col-6 colorBlue cursor' onClick={() => navigate(`/${createSpot}`)}>
                     להוסיף יעד
                 </div>
                 <div className='col-6 fw-bold row'>

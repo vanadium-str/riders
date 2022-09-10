@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { events, URL, isEmailValid } from '../../utils/constants';
+import { events, URL, isEmailValid, matchPhoneCodes } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function Button({name, login, callbackWrongMessage}) {
@@ -31,6 +31,7 @@ function Button({name, login, callbackWrongMessage}) {
                     callbackWrongMessage(data.status);
                 }else if(data){
                     setUserId(data.user_id);
+                    window.localStorage.setItem('userId', data.user_id);
                     eventsPage();
                 }
             })
@@ -40,14 +41,13 @@ function Button({name, login, callbackWrongMessage}) {
         if(email === ''){
             callbackWrongMessage(0);
         }else if(username === ''){
-            //callbackWrongMessage('username');
-            alert('Please add name')
+            alert('Please add name');
         }else if(phone === ''){
-            //callbackWrongMessage('phone');
-            alert('Please add phone')
+            alert('Please add phone');
+        }else if(!matchPhoneCodes(phone)){
+            alert('Please put correct phone number');
         }else if(!isEmailValid(email)){
-            //callbackWrongMessage('mailType');
-            alert('Your email is incorrect')
+            alert('Your email is incorrect');
         }else if(pass === passRepeat && pass !== '' && passRepeat !== '' && isEmailValid(email)){
             fetch(URL + 'register', {
                 method: 'POST',
@@ -69,6 +69,7 @@ function Button({name, login, callbackWrongMessage}) {
                 }else if(data){
                     setUserId(data.user_id);
                    // setAdmin(data.is_admin);
+                    window.localStorage.setItem('userId', data.user_id);
                     eventsPage();    
                 }
 

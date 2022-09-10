@@ -8,7 +8,7 @@ function Privacy() {
     const [bottom, setBottom] = useState(false);
 
     return (
-        <div className='d-flex flex-column align-items-center cursor mb-4'>
+        <div className='d-flex flex-column align-items-center cursor mb-7'>
             <div className={`inputSize chooseTopBlock p-2 text-end ${bottom ? 'colorGrey' : 'backgroundBlue'}`} onClick={() => {
                 setBottom(false);
                 setPrivacy(0);

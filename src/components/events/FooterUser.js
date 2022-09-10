@@ -35,7 +35,7 @@ function FooterUser() {
     function resetAll(){
         setDate('');
         setDateEnd('');
-        setDriver('');
+        //setDriver('');
         setPrice('');
         setMinPlaces(0);
         setMaxPlaces(0);

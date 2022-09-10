@@ -41,6 +41,12 @@ function PersonalData() {
                 <div className='col-12 mt-2 mb-5 pe-4 text-end fontSizeMedium'>
                     {userData.email}
                 </div>
+                <div className='col-12 mt-2 mb-2 pe-4 text-end fontSizeMedium'>
+                    <b> כניסה אחרונה</b> {userData.last_login}
+                </div>
+                <div className='col-12 mt-2 mb-5 pe-4 text-end fontSizeMedium'>
+                    <b>הקפצות שביקרתי</b>  {userData.runs_visited}
+                </div>
             </div>
             <div className='row pe-4'>
                     <div className='col-12 text-end colorBlue mb-2 cursor fontSizeMedium' onClick={() => navigate(`/${editPersonalData}`)}>
@@ -48,6 +54,7 @@ function PersonalData() {
                     </div>
                     <div className='col-12 text-end colorRed cursor fontSizeMedium' onClick={() => {
                         setUserId(-1);
+                        window.localStorage.setItem('userId', -1);
                         navigate(`/`);
                     }}>
                         יציאה

@@ -7,7 +7,7 @@ function Location({ name, id, coordinates }) {
     const { spotId, setSpotId } = useContext(ridersAppContext);
 
     return (
-        <div className={`col-5 locationBlock ${id === spotId ? 'backgroundBlue' : 'backgroundWhite'}`} onClick={() => {
+        <div className={`col-5 locationBlock cursor ${id === spotId ? 'backgroundBlue' : 'backgroundWhite'}`} onClick={() => {
             if(spotId !== id){
                 setSpotId(id);
             }

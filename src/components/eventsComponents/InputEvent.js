@@ -15,8 +15,8 @@ function InputEvent({ type, name, content, empty }) {
     
     return (
         <div className='col-12 d-flex justify-content-center'>
-            <input className={`inputSignIn text-end ltr ${empty ? 'inputWrong' : ''}`} type={type} placeholder={name}
-                value={content === 'driver' ? driver : ''} disabled={content === 'driver'} onChange={(event) => {
+            <input className={`inputSignIn text-end ltr ${empty ? 'inputWrong' : ''}`} type={type}
+            placeholder={content === 'driver' ? driver : name} disabled={content === 'driver'} onChange={(event) => {
                     typeDefinition(event.target.value);
             }}/>
         </div>
