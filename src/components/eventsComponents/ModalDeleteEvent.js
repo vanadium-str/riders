@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { errorPage, events, myEvents, timeToRender, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
-function ModalDeleteEvent({ active, setActive, event }) {
+function ModalDeleteEvent({ active, setActive, event, date }) {
 
     const { currentEvent, setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
@@ -39,7 +39,7 @@ function ModalDeleteEvent({ active, setActive, event }) {
             <div className={`modalContent ${active ? 'active' : ''} d-flex flex-column justify-content-center`}
                 onClick={(e) => e.stopPropagation()}>
                 <div className='d-flex justify-content-center rtl'>
-                    האם אתה בודאות רוצה לבטל את מקומך בהקפצה {event.spot} {timeToRender(event.time_start)} ?              
+                    האם אתה בודאות רוצה לבטל את מקומך בהקפצה {event.spot} {date} {timeToRender(event.time_start)} ?              
                 </div>
                 <div className='d-flex flex-row justify-content-around mt-5'>
                     <button className='buttonSmall' onClick={() => deleteEvent()}>

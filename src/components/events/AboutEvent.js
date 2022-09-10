@@ -83,7 +83,7 @@ function AboutEvent() {
                     </div>                 
                 }
                 
-                <ModalDeleteEvent active={activeModalDeleteEvent} setActive={setActiveModalDeleteEvent} event={event}/>
+                <ModalDeleteEvent active={activeModalDeleteEvent} setActive={setActiveModalDeleteEvent} event={event} date={date}/>
 
                 {/* <div className='col-7 text-start ms-3 colorBlue'>
                     צפו בעוד
