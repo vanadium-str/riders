@@ -5,9 +5,15 @@ function InputEventSmall({ type, name, explanation, content, empty }) {
 
     const { setMaxPlaces, setMinPlaces, date, setDate, setDateEnd, eventsList, currentEvent } = useContext(ridersAppContext);
 
-    const eventCurrent = eventsList.find((value) => {
-        return value.event_id === currentEvent
-    })
+    const eventCurrent = [];
+    if(eventsList.lenght){
+        eventCurrent = eventsList.find((value) => {
+            return value.event_id === currentEvent
+        })
+    }
+    // const eventCurrent = eventsList.find((value) => {
+    //     return value.event_id === currentEvent
+    // })
 
     function setTime(event, start){
         if(content === 'timeStartEdit' || content === 'timeEndEdit'){

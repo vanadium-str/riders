@@ -18,7 +18,7 @@ function EditPersonalData() {
         console.log(userId)
         console.log(pass)
         console.log(oldPass)
-        fetch(URL + 'user_update', {
+        fetch(URL + 'change_password', {
             method: 'PUT',
             body: JSON.stringify({
               user_id: userId,

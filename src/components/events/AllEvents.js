@@ -19,12 +19,12 @@ function AllEvents() {
             .then(data => {
                 setEventsList(data);
                 console.log(data);
+                setLoading(false)
                 data.forEach((item) => {                 
                     dateFormatting(dates, item);
                 });
                 let datesFiltered = dates.filter((value, index, array) => array.indexOf(value) === index);
                 setUniqueDates(datesFiltered);
-                setLoading(false)
             }
         );
     }, []);
