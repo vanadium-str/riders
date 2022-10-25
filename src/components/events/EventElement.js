@@ -5,13 +5,16 @@ import { aboutEvent, timeToRender } from '../../utils/constants';
 import { ridersAppContext } from "../../utils/context";
 import NumberOfSeats from '../eventsComponents/NumberOfSeats';
 import PlaceAndTime from '../eventsComponents/PlaceAndTime';
+import { useSelector } from 'react-redux';
+import { userAdminSelector } from '../../redux/selectors';
 
 function EventElement({ event, page }) {
 
-    const { setCurrentEvent, admin, setCurrentPage } = useContext(ridersAppContext);
+    const { setCurrentEvent, setCurrentPage } = useContext(ridersAppContext);
     
     const vacancy = event.max_participants - event.booked;
     let navigate = useNavigate();
+    const admin = useSelector(userAdminSelector);
 
     return(
         <div className='container backgroundElement my-1 p-2 cursor' onClick={() => {

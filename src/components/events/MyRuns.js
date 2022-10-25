@@ -3,16 +3,20 @@ import { dateFormatting, dateTorender, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import EventElement from './EventElement';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
+import { useSelector } from 'react-redux';
+import { userIdSelector } from '../../redux/selectors';
 
 function MyRuns() {
 
-    const { myRuns, setMyRuns, userId } = useContext(ridersAppContext);
+    const { myRuns, setMyRuns } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
     const [loading, setLoading] = useState(false);
     let dates = [];
+    const userId = useSelector(userIdSelector);
 
     useEffect(() => {
+        setLoading(true);
         fetch(URL + 'myruns', {
             method: 'POST',
             body: JSON.stringify({
@@ -26,6 +30,7 @@ function MyRuns() {
         .then(data => {
             setMyRuns(data);
             console.log(data);
+            setLoading(false);
             if(data.length){
                 data.forEach((item) => {                 
                     dateFormatting(dates, item);
@@ -42,7 +47,7 @@ function MyRuns() {
 
             {loading ? 
                 <div className='d-flex justify-content-center mt-5'>
-                    <div class="spinner-border" role="status"/>
+                    <div className="spinner-border" role="status"/>
                 </div>
             : <></>}
             

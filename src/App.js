@@ -12,13 +12,11 @@ function App() {
   const [myEvents, setMyEvents] = useState([]);
   const [ridersList, setRidersList] = useState([]);
   const [spotsList, setSpotsList] = useState([]);
-  const [admin, setAdmin] = useState(1);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [username, setUsername] = useState('');
   const [pass, setPass] = useState('');
   const [passRepeat, setPassRepeat] = useState('');
-  const [userId, setUserId] = useState(-1);
   const [date, setDate] = useState('');
   const [dateEnd, setDateEnd] = useState('');
   const [driver, setDriver] = useState('יתאן');
@@ -38,8 +36,8 @@ function App() {
   return (
     <div>
       <ridersAppContext.Provider value = {
-        { page, setPage, eventsList, setEventsList, currentBlock, setCurrentBlock, admin, setAdmin, pageEvent, setPageEvent, pass, setPass,
-          passRepeat, setPassRepeat, email, setEmail, userId, setUserId, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
+        { page, setPage, eventsList, setEventsList, currentBlock, setCurrentBlock, pageEvent, setPageEvent, pass, setPass,
+          passRepeat, setPassRepeat, email, setEmail, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
           maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, myRuns, setMyRuns, currentEvent, setCurrentEvent, myEvents,
           setMyEvents, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
           setTrackLevel, spotName, setSpotName, userData, setUserData, coordinates, setCoordinates, oldPass, setOldPass, phone, setPhone,

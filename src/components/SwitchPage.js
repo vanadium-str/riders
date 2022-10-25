@@ -1,7 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from "react-router-dom";
-import { ridersAppContext } from '../utils/context';
-import { aboutEvent, alreadyJoin, createEvent, createSpot, editPersonalData, errorPage, events, joinFailure, joinSuccess, personalArea, registration, unsubscribeSuccess, waitingList } from '../utils/constants';
+import {
+    aboutEvent,
+    alreadyJoin,
+    createEvent,
+    createSpot,
+    editPersonalData,
+    errorPage,
+    events,
+    joinFailure,
+    joinSuccess,
+    personalArea,
+    registration,
+    unsubscribeSuccess,
+    waitingList
+} from '../utils/constants';
 import Registration from './login/Registration';
 import PageConstructor from './PageConstructor';
 import StartPage from './login/StartPage';
@@ -18,13 +31,18 @@ import EditPersonalData from './personalArea/EditPersonalData';
 import AboutEvent from './events/AboutEvent';
 import CreateEvent from './events/CreateEvent';
 import CreateSpot from './events/CreateSpot';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserId } from '../redux/slices/userSlice';
+import { userAdminSelector, userIdSelector } from '../redux/selectors';
 
 function SwitchPage() {
-    
-    const { admin, userId, setUserId } = useContext(ridersAppContext);
+
+    const dispatch = useDispatch();
+    const userId = useSelector(userIdSelector);
+    const admin = useSelector(userAdminSelector);
 
     useEffect(() => {
-        setUserId(JSON.parse(window.localStorage.getItem('userId')));
+        dispatch(setUserId(JSON.parse(window.localStorage.getItem('userId'))));
     }, []);
 
     return(
@@ -33,7 +51,7 @@ function SwitchPage() {
             <Route path={`/${createEvent}`} element={<CreateEvent/>} exact/>
             <Route path={`/${createSpot}`} element={<CreateSpot/>} exact/>
             <Route path={`/${registration}`} element={<Registration/>} exact/>
-            <Route path={`/${events}`} element={userId == -1 ? 
+            <Route path={`/${events}`} element={userId === -1 ? 
                         <StartPage/>
                         : <div>
                             <PageConstructor/>
@@ -46,8 +64,8 @@ function SwitchPage() {
             <Route path={`/${unsubscribeSuccess}`} element={<UnsubscribeSuccess/>} exact/>
             <Route path={`/${alreadyJoin}`} element={<AlreadyJoin/>} exact/>
             <Route path={`/${errorPage}`} element={<ErrorPage/>} exact/>
-            <Route path={`/${personalArea}`} element={userId == -1 ? <StartPage/> : <PersonalData/>} exact/>
-            <Route path={`/${editPersonalData}`} element={userId == -1 ? <StartPage/> : <EditPersonalData/>} exact/>
+            <Route path={`/${personalArea}`} element={userId === -1 ? <StartPage/> : <PersonalData/>} exact/>
+            <Route path={`/${editPersonalData}`} element={userId === -1 ? <StartPage/> : <EditPersonalData/>} exact/>
             <Route path={`/`} element={<StartPage/>} exact/>
         </Routes>
     );

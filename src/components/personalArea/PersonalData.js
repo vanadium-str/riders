@@ -3,12 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
 import { editPersonalData, events, URL } from '../../utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { userIdSelector } from '../../redux/selectors';
+import { setUserId } from '../../redux/slices/userSlice';
 
 function PersonalData() {
 
-    const { userId, userData, setUserData, setUserId } = useContext(ridersAppContext);
+    const { userData, setUserData } = useContext(ridersAppContext);
 
     let navigate = useNavigate();
+    const dispatch = useDispatch();
+    const userId = useSelector(userIdSelector);
     
     useEffect(() => {
         fetch(URL + 'user_info', {
@@ -53,7 +58,7 @@ function PersonalData() {
                         שינוי סיסמה
                     </div>
                     <div className='col-12 text-end colorRed cursor fontSizeMedium' onClick={() => {
-                        setUserId(-1);
+                        dispatch(setUserId(-1));
                         window.localStorage.setItem('userId', -1);
                         navigate(`/`);
                     }}>

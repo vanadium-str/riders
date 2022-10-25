@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { userIdSelector } from '../../redux/selectors';
 import { createEvent, dateFormatting, dateTorender, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
@@ -7,13 +9,15 @@ import EventElement from './EventElement';
 
 function MyEvents() {
 
-    const { userId, myEvents, setMyEvents } = useContext(ridersAppContext);
+    const { myEvents, setMyEvents } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
     const [loading, setLoading] = useState(false);
     let dates = [];
+    const userId = useSelector(userIdSelector);
 
     useEffect(() => {
+        setLoading(true);
         fetch(URL + 'mycreated', {
             method: 'POST',
             body: JSON.stringify({
@@ -27,6 +31,7 @@ function MyEvents() {
         .then(data => {
             setMyEvents(data);
             console.log(data);
+            setLoading(false);
             if(data.length){
                 data.forEach((item) => {                 
                     dateFormatting(dates, item);
@@ -43,7 +48,7 @@ function MyEvents() {
 
             {loading ? 
                 <div className='d-flex justify-content-center mt-5'>
-                    <div class="spinner-border" role="status"/>
+                    <div className="spinner-border" role="status"/>
                 </div>
             : <></>}
             

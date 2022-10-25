@@ -5,7 +5,7 @@ import { URL } from '../../utils/constants';
 
 function RidersList({ booked, max, eventId}) {
 
-    const { ridersList, setRidersList, admin, currentPage } = useContext(ridersAppContext);
+    const { ridersList, setRidersList, currentPage } = useContext(ridersAppContext);
 
     useEffect(() => {
         fetch(URL + 'participants_list', {

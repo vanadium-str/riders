@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { userIdSelector } from '../../redux/selectors';
 import { unsubscribeSuccess, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function ModalUnsubscribe({ active, setActive }) {
 
-    const { currentEvent, userId } = useContext(ridersAppContext);
+    const { currentEvent } = useContext(ridersAppContext);
 
     let navigate = useNavigate();
+
+    const userId = useSelector(userIdSelector);
 
     const unsubscribe = () => {
         fetch(URL + 'leave_event',{

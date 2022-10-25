@@ -1,17 +1,18 @@
 import React, { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { events, URL, isEmailValid, matchPhoneCodes } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
+import { setAdmin, setUserId } from '../../redux/slices/userSlice';
+import { userIdSelector } from '../../redux/selectors';
 
-function Button({name, login, callbackWrongMessage}) {
+function Button({ name, login, callbackWrongMessage }) {
 
-    const { email, username, phone, pass, passRepeat, setUserId, setAdmin } = useContext(ridersAppContext);
+    const { email, username, phone, pass, passRepeat } = useContext(ridersAppContext);
 
     let navigate = useNavigate();
-
-    const eventsPage = () => {
-        navigate(`/${events}`);
-    };
+    const dispatch = useDispatch();
+    const userId = useSelector(userIdSelector);
 
     const loginCheck = () => {
         fetch(URL + 'login', {
@@ -26,13 +27,14 @@ function Button({name, login, callbackWrongMessage}) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                console.log(data);
                 if(data.status === 1 || data.status === 2){
                     callbackWrongMessage(data.status);
                 }else if(data){
-                    setUserId(data.user_id);
+                    //dispatch(setAdmin(data.is_admin));
+                    dispatch(setUserId(data.user_id));
                     window.localStorage.setItem('userId', data.user_id);
-                    eventsPage();
+                    navigate(`/${events}`);
                 }
             })
     }
@@ -67,12 +69,11 @@ function Button({name, login, callbackWrongMessage}) {
                 if(data.status === 1){
                     callbackWrongMessage(data.status);
                 }else if(data){
-                    setUserId(data.user_id);
-                   // setAdmin(data.is_admin);
+                    //dispatch(setAdmin(data.is_admin));
+                    dispatch(setUserId(data.user_id));
                     window.localStorage.setItem('userId', data.user_id);
-                    eventsPage();    
+                    navigate(`/${events}`);    
                 }
-
             })
         }
     }

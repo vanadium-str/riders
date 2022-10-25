@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { userIdSelector } from '../../redux/selectors';
 import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent, URL, allEvents } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ModalEdit from '../eventsComponents/ModalEdit';
@@ -8,12 +10,14 @@ import ModalUnsubscribe from './ModalUnsubscribe';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
-    const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, userId, spotId, spotName, trackLevel, setDate,
+    const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, spotId, spotName, trackLevel, setDate,
             setDateEnd, setDriver, setPrice, setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock, setSpotId,
             setTrackLevel, setSpotName, setCoordinates, coordinates, setCurrentPage } = useContext(ridersAppContext);
 
     const [activeModalEdit, setActiveModalEdit] = useState(false);
     const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
+
+    const userId = useSelector(userIdSelector);
     
     let navigate = useNavigate();
     const eventsPage = () => {

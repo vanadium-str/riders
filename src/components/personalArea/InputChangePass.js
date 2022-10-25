@@ -4,8 +4,6 @@ import InputMessage from '../fieldsLogin/InputMessage';
 
 function InputChangePass({ name, content, callbackSetPass, wrong, wrongMessage }) {
 
-    const { userId, userData, setUserData, setPageEvent } = useContext(ridersAppContext);
-
     const [showPass, setShowPass] = useState(false);
     
     return (

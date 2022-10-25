@@ -4,20 +4,20 @@ import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
 import { errorPage, personalArea, URL } from '../../utils/constants';
 import InputChangePass from './InputChangePass';
+import { useSelector } from 'react-redux';
+import { userIdSelector } from '../../redux/selectors';
 
 function EditPersonalData() {
 
-    const { userId, pass, passRepeat, setPass, setPassRepeat, oldPass, setOldPass } = useContext(ridersAppContext);
+    const { pass, passRepeat, setPass, setPassRepeat, oldPass, setOldPass } = useContext(ridersAppContext);
 
     const [wrongOldPass, setWrongOldPass] = useState(false);
     const [wrongNewPass, setWrongNewPass] = useState(false);
 
     let navigate = useNavigate();
+    const userId = useSelector(userIdSelector);
 
     const changeData = () => {
-        console.log(userId)
-        console.log(pass)
-        console.log(oldPass)
         fetch(URL + 'change_password', {
             method: 'PUT',
             body: JSON.stringify({

@@ -6,20 +6,20 @@ import HeaderEvent from '../eventsComponents/HeaderEvent';
 
 function AllEvents() {
 
-    const { eventsList, setEventsList, userId } = useContext(ridersAppContext);
+    const { eventsList, setEventsList } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
     const [loading, setLoading] = useState(false);
     let dates = [];
 
     useEffect(() => {
-       setLoading(true)
+        setLoading(true);
         fetch(URL + 'runs')
             .then(response => response.json())
             .then(data => {
                 setEventsList(data);
                 console.log(data);
-                setLoading(false)
+                setLoading(false);
                 data.forEach((item) => {                 
                     dateFormatting(dates, item);
                 });
@@ -35,7 +35,7 @@ function AllEvents() {
 
             {loading ? 
                 <div className='d-flex justify-content-center mt-5'>
-                    <div class="spinner-border" role="status"/>
+                    <div className="spinner-border" role="status"/>
                 </div>
             : <></>}
 
