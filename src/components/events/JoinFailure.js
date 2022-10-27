@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { eventsListSelector } from '../../redux/selectors';
 import { events } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 
 function JoinFailure() {
 
-    const { eventsList, currentEvent, setPageEvent } = useContext(ridersAppContext);
+    const { currentEvent, setPageEvent } = useContext(ridersAppContext);
 
     let navigate = useNavigate();
+    const eventsList = useSelector(eventsListSelector);
+
     const event = eventsList.find((value) => {
         return value.event_id === currentEvent
     })

@@ -1,12 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React from 'react';
 import google from '../../images/google.jpg';
 import fb from '../../images/fb.jpg';
 import apple from '../../images/apple.jpg';
 
 function SocialMedia() {
-
-    const {setPage} = useContext(ridersAppContext);
 
     return (
         <div className='row'>

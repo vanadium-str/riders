@@ -1,9 +1,6 @@
-import React, {useContext, useEffect} from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React from 'react';
 
-function InputMessage({wrongMessage, green}) {
-
-    const {setPage} = useContext(ridersAppContext);
+function InputMessage({ wrongMessage, green }) {
 
     return (
         <p className={`inputMessage me-4 ${green ? 'inputMessageGreen' : ''}`}>{wrongMessage}</p>

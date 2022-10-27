@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { eventsListSelector } from '../../redux/selectors';
 import { ridersAppContext } from '../../utils/context';
 
 function InputEventSmall({ type, name, explanation, content, empty }) {
 
-    const { setMaxPlaces, setMinPlaces, date, setDate, setDateEnd, eventsList, currentEvent } = useContext(ridersAppContext);
+    const { setMaxPlaces, setMinPlaces, date, setDate, setDateEnd, currentEvent } = useContext(ridersAppContext);
 
-    const eventCurrent = [];
+    const eventsList = useSelector(eventsListSelector);
+    let eventCurrent = [];
+    
     if(eventsList.lenght){
         eventCurrent = eventsList.find((value) => {
             return value.event_id === currentEvent

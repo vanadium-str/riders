@@ -10,16 +10,17 @@ import { dateFormatting, dateTorender, timeToRender } from '../../utils/constant
 import RidersList from '../eventsComponents/RidersList';
 import ModalDeleteEvent from '../eventsComponents/ModalDeleteEvent';
 import { useSelector } from 'react-redux';
-import { userAdminSelector } from '../../redux/selectors';
+import { eventsListSelector, userAdminSelector } from '../../redux/selectors';
 
 function AboutEvent() {
 
-    const { eventsList, currentPage } = useContext(ridersAppContext);
+    const { currentPage } = useContext(ridersAppContext);
 
     const [activeModalDeleteEvent, setActiveModalDeleteEvent] = useState(false);
 
     let { idEvent } = useParams();
     const admin = useSelector(userAdminSelector);
+    const eventsList = useSelector(eventsListSelector);
 
     const event = eventsList.find((value) => {
         return value.event_id == idEvent;

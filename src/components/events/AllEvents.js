@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { dateFormatting, dateTorender, URL } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import EventElement from './EventElement';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEventsList } from '../../redux/slices/eventsSlice';
+import { eventsListSelector } from '../../redux/selectors';
 
 function AllEvents() {
 
-    const { eventsList, setEventsList } = useContext(ridersAppContext);
-
+    const dispatch = useDispatch();
     const [uniqueDates, setUniqueDates] = useState([]);
     const [loading, setLoading] = useState(false);
+    const eventsList = useSelector(eventsListSelector);
     let dates = [];
 
     useEffect(() => {
@@ -17,7 +19,7 @@ function AllEvents() {
         fetch(URL + 'runs')
             .then(response => response.json())
             .then(data => {
-                setEventsList(data);
+                dispatch(setEventsList(data));
                 console.log(data);
                 setLoading(false);
                 data.forEach((item) => {                 
@@ -42,11 +44,11 @@ function AllEvents() {
             <div className='row-reverse'>
 
                 {eventsList.length ? uniqueDates.map((item, key) => {
-                    function filter (data){
+                    function filter(data) {
                         let dateFormat = new Date(data.time_start);
-                        if(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}` === item){
+                        if(`${dateFormat.getDate()}/${dateFormat.getMonth()}/${dateFormat.getFullYear()}` === item) {
                             return true;
-                        }else{
+                        } else {
                             return false;
                         }
                     }

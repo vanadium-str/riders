@@ -4,10 +4,8 @@ import SwitchPage from './components/SwitchPage';
 import { ridersAppContext } from './utils/context';
 
 function App() {
-  const [page, setPage] = useState('');
   const [pageEvent, setPageEvent] = useState('');
   const [currentBlock, setCurrentBlock] = useState('allTrips');
-  const [eventsList, setEventsList] = useState([]);
   const [myRuns, setMyRuns] = useState([]);
   const [myEvents, setMyEvents] = useState([]);
   const [ridersList, setRidersList] = useState([]);
@@ -36,7 +34,7 @@ function App() {
   return (
     <div>
       <ridersAppContext.Provider value = {
-        { page, setPage, eventsList, setEventsList, currentBlock, setCurrentBlock, pageEvent, setPageEvent, pass, setPass,
+        { currentBlock, setCurrentBlock, pageEvent, setPageEvent, pass, setPass,
           passRepeat, setPassRepeat, email, setEmail, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
           maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, myRuns, setMyRuns, currentEvent, setCurrentEvent, myEvents,
           setMyEvents, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
