@@ -6,8 +6,6 @@ import { ridersAppContext } from './utils/context';
 function App() {
   const [pageEvent, setPageEvent] = useState('');
   const [currentBlock, setCurrentBlock] = useState('allTrips');
-  const [myRuns, setMyRuns] = useState([]);
-  const [myEvents, setMyEvents] = useState([]);
   const [ridersList, setRidersList] = useState([]);
   const [spotsList, setSpotsList] = useState([]);
   const [email, setEmail] = useState('');
@@ -36,8 +34,7 @@ function App() {
       <ridersAppContext.Provider value = {
         { currentBlock, setCurrentBlock, pageEvent, setPageEvent, pass, setPass,
           passRepeat, setPassRepeat, email, setEmail, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
-          maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, myRuns, setMyRuns, currentEvent, setCurrentEvent, myEvents,
-          setMyEvents, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
+          maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, currentEvent, setCurrentEvent, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
           setTrackLevel, spotName, setSpotName, userData, setUserData, coordinates, setCoordinates, oldPass, setOldPass, phone, setPhone,
           username, setUsername }
       }>

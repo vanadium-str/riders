@@ -19,8 +19,8 @@ function AllEvents() {
         fetch(URL + 'runs')
             .then(response => response.json())
             .then(data => {
-                dispatch(setEventsList(data));
                 console.log(data);
+                dispatch(setEventsList(data));
                 setLoading(false);
                 data.forEach((item) => {                 
                     dateFormatting(dates, item);

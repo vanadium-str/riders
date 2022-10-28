@@ -1,20 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { userIdSelector } from '../../redux/selectors';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { myEventsSelector, userIdSelector } from '../../redux/selectors';
+import { setMyEvents } from '../../redux/slices/eventsSlice';
 import { createEvent, dateFormatting, dateTorender, URL } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import EventElement from './EventElement';
 
 function MyEvents() {
 
-    const { myEvents, setMyEvents } = useContext(ridersAppContext);
-
     const [uniqueDates, setUniqueDates] = useState([]);
     const [loading, setLoading] = useState(false);
     let dates = [];
+    const dispatch = useDispatch();
     const userId = useSelector(userIdSelector);
+    const myEvents = useSelector(myEventsSelector);
 
     useEffect(() => {
         setLoading(true);
@@ -29,8 +29,8 @@ function MyEvents() {
         })
         .then(response => response.json())
         .then(data => {
-            setMyEvents(data);
             console.log(data);
+            dispatch(setMyEvents(data));
             setLoading(false);
             if(data.length){
                 data.forEach((item) => {                 

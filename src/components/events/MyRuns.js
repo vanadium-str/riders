@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { dateFormatting, dateTorender, URL } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import EventElement from './EventElement';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
-import { useSelector } from 'react-redux';
-import { userIdSelector } from '../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { myRunsSelector, userIdSelector } from '../../redux/selectors';
+import { setMyRuns } from '../../redux/slices/eventsSlice';
 
 function MyRuns() {
-
-    const { myRuns, setMyRuns } = useContext(ridersAppContext);
 
     const [uniqueDates, setUniqueDates] = useState([]);
     const [loading, setLoading] = useState(false);
     let dates = [];
+    const dispatch = useDispatch();
     const userId = useSelector(userIdSelector);
+    const myRuns = useSelector(myRunsSelector);
 
     useEffect(() => {
         setLoading(true);
@@ -28,8 +28,8 @@ function MyRuns() {
         })
         .then(response => response.json())
         .then(data => {
-            setMyRuns(data);
             console.log(data);
+            dispatch(setMyRuns(data));
             setLoading(false);
             if(data.length){
                 data.forEach((item) => {                 
