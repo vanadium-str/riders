@@ -1,19 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
 import { editPersonalData, events, URL } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { userIdSelector } from '../../redux/selectors';
-import { setUserId } from '../../redux/slices/userSlice';
+import { userDataSelector, userIdSelector } from '../../redux/selectors';
+import { setUserData, setUserId } from '../../redux/slices/userSlice';
 
 function PersonalData() {
 
-    const { userData, setUserData } = useContext(ridersAppContext);
-
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const userId = useSelector(userIdSelector);
+    const userData = useSelector(userDataSelector);
     
     useEffect(() => {
         fetch(URL + 'user_info', {
@@ -28,7 +26,7 @@ function PersonalData() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            setUserData(data);
+            dispatch(setUserData(data));
         })
     }, []);
     

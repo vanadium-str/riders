@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
-import { eventsListSelector } from '../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { dateSelector, eventsListSelector } from '../../redux/selectors';
+import { setDate, setDateEnd } from '../../redux/slices/eventsDataSlice';
 import { ridersAppContext } from '../../utils/context';
 
 function InputEventSmall({ type, name, explanation, content, empty }) {
 
-    const { setMaxPlaces, setMinPlaces, date, setDate, setDateEnd, currentEvent } = useContext(ridersAppContext);
+    const { setMaxPlaces, setMinPlaces, currentEvent } = useContext(ridersAppContext);
 
+    const dispatch = useDispatch();
     const eventsList = useSelector(eventsListSelector);
+    const date = useSelector(dateSelector);
     let eventCurrent = [];
     
     if(eventsList.lenght){
@@ -25,13 +28,13 @@ function InputEventSmall({ type, name, explanation, content, empty }) {
             let newDate = new Date(eventCurrent.time_start);
             newDate.setHours(timeArray[0]);
             newDate.setMinutes(timeArray[1]);
-            start ? setDate(newDate) : setDateEnd(newDate);
+            start ? dispatch(setDate(newDate)) : dispatch(setDateEnd(newDate));
         }else if(date){
             let timeArray = event.split(':');
             let newDate = new Date(date);
             newDate.setHours(timeArray[0]);
             newDate.setMinutes(timeArray[1]);
-            start ? setDate(newDate) : setDateEnd(newDate);
+            start ? dispatch(setDate(newDate)) : dispatch(setDateEnd(newDate));
         }
     }
 

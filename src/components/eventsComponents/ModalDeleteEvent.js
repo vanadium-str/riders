@@ -7,7 +7,7 @@ function ModalDeleteEvent({ active, setActive, event, date }) {
 
     const { currentEvent, setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const deleteEvent = () => {

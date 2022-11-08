@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
+import { useDispatch } from 'react-redux';
+import { setEmail, setPass, setPassRepeat } from '../../redux/slices/userSlice';
 
 function Header({name, back}) {
 
-    const { setPass, setPassRepeat, setEmail } = useContext(ridersAppContext);
-
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const startPage = () => {
-        setEmail('');
-        setPass('');
-        setPassRepeat('');
+        dispatch(setEmail(''));
+        dispatch(setPass(''));
+        dispatch(setPassRepeat(''));
         navigate(`/`);
     };
 

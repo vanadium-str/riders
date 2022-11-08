@@ -1,21 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
 import { errorPage, personalArea, URL } from '../../utils/constants';
 import InputChangePass from './InputChangePass';
-import { useSelector } from 'react-redux';
-import { userIdSelector } from '../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { oldPassSelector, userIdSelector, userPassRepeatSelector, userPassSelector } from '../../redux/selectors';
+import { setOldPass, setPass, setPassRepeat } from '../../redux/slices/userSlice';
 
 function EditPersonalData() {
-
-    const { pass, passRepeat, setPass, setPassRepeat, oldPass, setOldPass } = useContext(ridersAppContext);
 
     const [wrongOldPass, setWrongOldPass] = useState(false);
     const [wrongNewPass, setWrongNewPass] = useState(false);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const userId = useSelector(userIdSelector);
+    const pass = useSelector(userPassSelector);
+    const passRepeat = useSelector(userPassRepeatSelector);
+    const oldPass = useSelector(oldPassSelector);
 
     const changeData = () => {
         fetch(URL + 'change_password', {
@@ -47,11 +49,11 @@ function EditPersonalData() {
 
     function callbackSetPass(content, event){
         if(content === 'oldPass'){
-            setOldPass(event);
+            dispatch(setOldPass(event));
         }else if(content === 'newPass'){
-            setPass(event);
+            dispatch(setPass(event));
         }else if(content === 'repeatPass'){
-            setPassRepeat(event);
+            dispatch(setPassRepeat(event));
         }
     }
     

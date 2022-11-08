@@ -10,7 +10,7 @@ function JoinFailure() {
 
     const { currentEvent, setPageEvent } = useContext(ridersAppContext);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const eventsList = useSelector(eventsListSelector);
 
     const event = eventsList.find((value) => {

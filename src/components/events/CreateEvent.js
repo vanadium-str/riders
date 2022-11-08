@@ -8,14 +8,17 @@ import InputEventSmall from '../eventsComponents/InputEventSmall';
 import Privacy from '../eventsComponents/Privacy';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
+import { useSelector } from 'react-redux';
+import { dateSelector } from '../../redux/selectors';
 
 function CreateEvent() {
 
-    const { date, spotsList, setSpotsList } = useContext(ridersAppContext);
+    const { spotsList, setSpotsList } = useContext(ridersAppContext);
 
     const [emptyField, setEmptyField] = useState('');
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const date = useSelector(dateSelector);
 
     const callbackWrongField = (field) => {
         setEmptyField(field);
@@ -47,9 +50,9 @@ function CreateEvent() {
                 </div>
             </div>
             <div className='row justify-content-center'>
-                {spotsList.map((item) => {
+                {spotsList.map((item, key) => {
                     return(
-                        <Location name={item.name} id={item.spot_id} coordinates={item.coordinates}/>
+                        <Location name={item.name} id={item.spot_id} coordinates={item.coordinates} key={key}/>
                     );
                 })}
             </div>

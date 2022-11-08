@@ -7,7 +7,7 @@ function UnsubscribeSuccess() {
 
     const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     return (
         <div className='d-flex flex-column justify-content-center align-items-center minHeight'>

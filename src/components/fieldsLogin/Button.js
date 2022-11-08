@@ -1,18 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { events, URL, isEmailValid, matchPhoneCodes } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import { setAdmin, setUserId } from '../../redux/slices/userSlice';
-import { userIdSelector } from '../../redux/selectors';
+import { userEmailSelector, usernameSelector, userPassRepeatSelector, userPassSelector, userPhoneSelector } from '../../redux/selectors';
 
 function Button({ name, login, callbackWrongMessage }) {
 
-    const { email, username, phone, pass, passRepeat } = useContext(ridersAppContext);
-
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userId = useSelector(userIdSelector);
+    const email = useSelector(userEmailSelector);
+    const phone = useSelector(userPhoneSelector);
+    const username = useSelector(usernameSelector);
+    const pass = useSelector(userPassSelector);
+    const passRepeat = useSelector(userPassRepeatSelector);
 
     const loginCheck = () => {
         fetch(URL + 'login', {

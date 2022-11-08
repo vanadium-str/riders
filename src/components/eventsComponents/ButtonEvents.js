@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { userIdSelector } from '../../redux/selectors';
+import { dateEndSelector, dateSelector, driverSelector, priceSelector, userIdSelector } from '../../redux/selectors';
+import { resetAll } from '../../redux/slices/eventsDataSlice';
 import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent, URL, allEvents } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ModalEdit from '../eventsComponents/ModalEdit';
@@ -10,16 +11,21 @@ import ModalUnsubscribe from './ModalUnsubscribe';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
-    const { setPageEvent, driver, minPlaces, maxPlaces, price, date, dateEnd, privacy, spotId, spotName, trackLevel, setDate,
-            setDateEnd, setDriver, setPrice, setMinPlaces, setMaxPlaces, setPrivacy, currentEvent, setCurrentBlock, setSpotId,
-            setTrackLevel, setSpotName, setCoordinates, coordinates, setCurrentPage } = useContext(ridersAppContext);
+    const { setPageEvent, minPlaces, maxPlaces, privacy, spotId, spotName, trackLevel,
+            currentEvent, setCurrentBlock, coordinates, setCurrentPage } = useContext(ridersAppContext);
 
     const [activeModalEdit, setActiveModalEdit] = useState(false);
     const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
 
     const userId = useSelector(userIdSelector);
+    const date = useSelector(dateSelector);
+    const dateEnd = useSelector(dateEndSelector);
+    const driver = useSelector(driverSelector);
+    const price = useSelector(priceSelector);
     
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const eventsPage = () => {
         setCurrentBlock('myRuns');
         setPageEvent(myRuns);
@@ -66,7 +72,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     navigate(`/${errorPage}`);                 
                 }else{
                     console.log(data);
-                    resetAll();
+                    dispatch(resetAll());
                     setCurrentBlock('allTrips');
                     setPageEvent(allEvents);
                     navigate(`/${events}`);
@@ -157,7 +163,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     console.error(data.error);
                     navigate(`/${errorPage}`);
                 }else{
-                    resetAll();
+                    dispatch(resetAll());
                     navigate(`/${createEvent}`);
                 }
             })
@@ -195,20 +201,6 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
             <ModalUnsubscribe active={activeModalUnsubscribe} setActive={setActiveModalUnsubscribe}/>
         </div>
     );
-
-    function resetAll(){
-        setDate('');
-        setDateEnd('');
-        //setDriver('');
-        setPrice('');
-        setMinPlaces(0);
-        setMaxPlaces(0);
-        setPrivacy('');
-        setSpotId(-1);
-        setTrackLevel([]);
-        setSpotName('');
-        setCoordinates('');
-    }
 }
 
 export default ButtonEvents;

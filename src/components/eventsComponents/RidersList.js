@@ -34,9 +34,9 @@ function RidersList({ booked, max, eventId}) {
                     {booked} / {max}
                 </div>
             </div>
-            {ridersList.map((item) => {
+            {ridersList.map((item, key) => {
                         return(
-                            <div className='d-flex flex-row justify-content-end mb-2'>
+                            <div className='d-flex flex-row justify-content-end mb-2' key={key}>
                                 <div>
                                     {item.phone}
                                 </div>

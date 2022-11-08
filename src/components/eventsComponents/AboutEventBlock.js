@@ -15,7 +15,7 @@ function AboutEventBlock({ top, middle, bottom, levels, coordinates }) {
       :
         levels.map((item, key) => {
           return (
-            <div>
+            <div key={key}>
               {item === 0 ? 'מתחילים 😚' : (item === 1 ? 'מתקדמים 😈' : 'מקצוענים 💀')}
             </div>
           )

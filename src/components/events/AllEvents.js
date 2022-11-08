@@ -60,7 +60,7 @@ function AllEvents() {
                             </div>
                             {sortedEvents.map((event, key) => {
                                 return(
-                                    <EventElement event={event} page={'allEvents'}/>
+                                    <EventElement event={event} page={'allEvents'} key={key}/>
                                 )
                             })}
                         </div>

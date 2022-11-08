@@ -1,15 +1,18 @@
-import React, { useContext } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { driverSelector } from '../../redux/selectors';
+import { setDate, setPrice } from '../../redux/slices/eventsDataSlice';
 
 function InputEvent({ type, name, content, empty }) {
 
-    const { setDate, driver, setPrice } = useContext(ridersAppContext);
+    const dispatch = useDispatch();
+    const driver = useSelector(driverSelector);
 
     const typeDefinition = (event) => {
         if(content === 'date'){
-            setDate(event);
+            dispatch(setDate(event));
         }else if(content === 'price'){
-            setPrice(event);
+            dispatch(setPrice(event));
         }
     }
     

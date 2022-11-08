@@ -7,7 +7,7 @@ function ErrorPage() {
 
     const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     return (
         <div className='container'>

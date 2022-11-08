@@ -1,24 +1,24 @@
-import React, { useContext, useState } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setEmail, setPass, setPassRepeat, setPhone, setUsername } from '../../redux/slices/userSlice';
 import InputMessage from './InputMessage';
 
 function InputSignIn({ placeholder, type, content, wrong, wrongMessage, green }) {
 
-    const { setEmail, setPass, setPassRepeat, setPhone, setUsername } = useContext(ridersAppContext);
-
     const [showPass, setShowPass] = useState(false);
+    const dispatch = useDispatch();
 
     const typeDefinition = (event) => {
         if(content === 'firstPass' || content === 'pass'){
-            setPass(event);
+            dispatch(setPass(event));
         }else if(content === 'secondPass'){
-            setPassRepeat(event);
+            dispatch(setPassRepeat(event));
         }else if(content === 'email'){
-            setEmail(event);
+            dispatch(setEmail(event));
         }else if(content === 'name'){
-            setUsername(event);
+            dispatch(setUsername(event));
         }else if(content === 'phone'){
-            setPhone(event);
+            dispatch(setPhone(event));
         }
     }
 

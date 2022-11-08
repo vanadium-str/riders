@@ -13,7 +13,7 @@ function EventElement({ event, page }) {
     const { setCurrentEvent, setCurrentPage } = useContext(ridersAppContext);
     
     const vacancy = event.max_participants - event.booked;
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const admin = useSelector(userAdminSelector);
 
     return(

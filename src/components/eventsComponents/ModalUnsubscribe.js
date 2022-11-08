@@ -9,7 +9,7 @@ function ModalUnsubscribe({ active, setActive }) {
 
     const { currentEvent } = useContext(ridersAppContext);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const userId = useSelector(userIdSelector);
 

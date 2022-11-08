@@ -8,14 +8,6 @@ function App() {
   const [currentBlock, setCurrentBlock] = useState('allTrips');
   const [ridersList, setRidersList] = useState([]);
   const [spotsList, setSpotsList] = useState([]);
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [username, setUsername] = useState('');
-  const [pass, setPass] = useState('');
-  const [passRepeat, setPassRepeat] = useState('');
-  const [date, setDate] = useState('');
-  const [dateEnd, setDateEnd] = useState('');
-  const [driver, setDriver] = useState('יתאן');
   const [price, setPrice] = useState('');
   const [minPlaces, setMinPlaces] = useState(0);
   const [maxPlaces, setMaxPlaces] = useState(0);
@@ -26,17 +18,13 @@ function App() {
   const [coordinates, setCoordinates] = useState([]);
   const [currentEvent, setCurrentEvent] = useState(-1);
   const [currentPage, setCurrentPage] = useState('');
-  const [userData, setUserData] = useState('');
-  const [oldPass, setOldPass] = useState('');
 
   return (
     <div>
       <ridersAppContext.Provider value = {
-        { currentBlock, setCurrentBlock, pageEvent, setPageEvent, pass, setPass,
-          passRepeat, setPassRepeat, email, setEmail, date, setDate, driver, setDriver, price, setPrice, minPlaces, setMinPlaces,
-          maxPlaces, setMaxPlaces, privacy, setPrivacy, dateEnd, setDateEnd, currentEvent, setCurrentEvent, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
-          setTrackLevel, spotName, setSpotName, userData, setUserData, coordinates, setCoordinates, oldPass, setOldPass, phone, setPhone,
-          username, setUsername }
+        { currentBlock, setCurrentBlock, pageEvent, setPageEvent, price, setPrice, minPlaces, setMinPlaces,
+          maxPlaces, setMaxPlaces, privacy, setPrivacy, currentEvent, setCurrentEvent, ridersList, setRidersList, currentPage, setCurrentPage, spotsList, setSpotsList, spotId, setSpotId,trackLevel,
+          setTrackLevel, spotName, setSpotName, coordinates, setCoordinates  }
       }>
         <SwitchPage/>
       </ridersAppContext.Provider>

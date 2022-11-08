@@ -1,17 +1,19 @@
-import React, { useContext, useState } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React, { useState } from 'react';
 import InputSignIn from '../fieldsLogin/InputSignIn';
 import Button from '../fieldsLogin/Button';
 import SocialMedia from './SocialMedia';
 import Header from './Header';
+import { useSelector } from 'react-redux';
+import { userPassRepeatSelector, userPassSelector } from '../../redux/selectors';
 
 function Registration() {
-
-    const { pass, passRepeat } = useContext(ridersAppContext);
 
     const [wrong, setWrong] = useState(false);
     const [wrongGreen, setWrongGreen] = useState(false);
     const [wrongMessage, setWrongMessage] = useState('');
+
+    const pass = useSelector(userPassSelector);
+    const passRepeat = useSelector(userPassRepeatSelector);
 
     const setWrongPass = () => {
         if(pass !== '' && passRepeat !== '' && pass !== passRepeat){
