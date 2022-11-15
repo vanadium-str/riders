@@ -1,15 +1,18 @@
-import React, { useContext } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React from 'react';
 import { createLink } from '../../utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { spotIdSelector } from '../../redux/selectors';
+import { setSpotId } from '../../redux/slices/eventsDataSlice';
 
 function Location({ name, id, coordinates }) {
 
-    const { spotId, setSpotId } = useContext(ridersAppContext);
+    const spotId = useSelector(spotIdSelector);
+    const dispatch = useDispatch();
 
     return (
         <div className={`col-5 locationBlock cursor ${id === spotId ? 'backgroundBlue' : 'backgroundWhite'}`} onClick={() => {
             if(spotId !== id){
-                setSpotId(id);
+                dispatch(setSpotId(id));
             }
         }}>
             <div className={`col-4 ${id === spotId ? 'backgroundBlue' : 'colorBlue'}`} onClick={() => {

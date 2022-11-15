@@ -1,9 +1,36 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { dateEndSelector, dateSelector, driverSelector, priceSelector, userIdSelector } from '../../redux/selectors';
+import {
+    coordinatesSelector,
+    currentEventSelector,
+    dateEndSelector,
+    dateSelector,
+    driverSelector,
+    maxPlacesSelector,
+    minPlacesSelector,
+    priceSelector,
+    privacySelector,
+    spotIdSelector,
+    spotNameSelector,
+    trackLevelSelector,
+    userIdSelector
+} from '../../redux/selectors';
 import { resetAll } from '../../redux/slices/eventsDataSlice';
-import { joinSuccess, events, joinFailure, waitingList, myRuns, alreadyJoin, errorPage, createEvent, URL, allEvents } from '../../utils/constants';
+import { setCurrentPage } from '../../redux/slices/pageSlice';
+import {
+    joinSuccess,
+    events,
+    joinFailure,
+    waitingList,
+    myRuns,
+    alreadyJoin,
+    errorPage,
+    createEvent,
+    URL,
+    allEvents,
+    myEvents
+} from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 import ModalEdit from '../eventsComponents/ModalEdit';
 import ModalDeleteEvent from './ModalDeleteEvent';
@@ -11,8 +38,7 @@ import ModalUnsubscribe from './ModalUnsubscribe';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
 
-    const { setPageEvent, minPlaces, maxPlaces, privacy, spotId, spotName, trackLevel,
-            currentEvent, setCurrentBlock, coordinates, setCurrentPage } = useContext(ridersAppContext);
+    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
     const [activeModalEdit, setActiveModalEdit] = useState(false);
     const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
@@ -22,12 +48,20 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
     const dateEnd = useSelector(dateEndSelector);
     const driver = useSelector(driverSelector);
     const price = useSelector(priceSelector);
+    const minPlaces = useSelector(minPlacesSelector);
+    const maxPlaces = useSelector(maxPlacesSelector);
+    const privacy = useSelector(privacySelector);
+    const spotId = useSelector(spotIdSelector);
+    const trackLevel = useSelector(trackLevelSelector);
+    const spotName = useSelector(spotNameSelector);
+    const coordinates = useSelector(coordinatesSelector);
+    const currentEvent = useSelector(currentEventSelector);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const eventsPage = () => {
-        setCurrentBlock('myRuns');
+        setCurrentBlock(myRuns);
         setPageEvent(myRuns);
         navigate(`/${events}`);
     };
@@ -188,7 +222,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                 }else if(event === 'createSpot'){
                     createSpot();
                 }else if(event === 'createEvent'){
-                    setCurrentPage('myEvents');
+                    dispatch(setCurrentPage(myEvents));
                     navigate(`/${createEvent}`);
                 }else{
                     setPageEvent(page);

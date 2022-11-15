@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { currentEventSelector } from '../../redux/selectors';
 import { errorPage, events, myEvents, timeToRender, URL } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function ModalDeleteEvent({ active, setActive, event, date }) {
 
-    const { currentEvent, setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
+    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
     const navigate = useNavigate();
-
+    const currentEvent = useSelector(currentEventSelector);
 
     const deleteEvent = () => {
         fetch(URL + 'delete_event',{
@@ -27,7 +29,7 @@ function ModalDeleteEvent({ active, setActive, event, date }) {
                 console.error('Data Base Error');
                 navigate(`/${errorPage}`);
             }else if(data){
-                setCurrentBlock('myEvents');
+                setCurrentBlock(myEvents);
                 setPageEvent(myEvents);
                 navigate(`/${events}`);
             }

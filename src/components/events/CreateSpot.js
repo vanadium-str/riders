@@ -1,15 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCoordinates, setSpotName } from '../../redux/slices/eventsDataSlice';
 import { createEvent } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import Tracks from '../eventsComponents/Tracks';
 
 function CreateSpot() {
 
-    const { setCoordinates, setSpotName } = useContext(ridersAppContext);
-
     const [emptyField, setEmptyField] = useState('');
+    const dispatch = useDispatch();
 
     const callbackWrongField = (field) => {
         setEmptyField(field);
@@ -22,13 +22,13 @@ function CreateSpot() {
                 <div className='col-12 d-flex justify-content-center position-relative'>
                     <input className={`inputSignIn text-end ltr ${emptyField === 'name' ? 'inputWrong' : ''}`} type='text' placeholder='שם'
                         onChange={(event) => {
-                            setSpotName(event.target.value);
+                            dispatch(setSpotName(event.target.value));
                     }}/>
                 </div>
                 <div className='col-12 d-flex justify-content-center position-relative'>
                     <input className={`inputSignIn text-end ltr ${emptyField === 'coordinates' ? 'inputWrong' : ''}`}
                         type='text' placeholder='32.609889, 35.122237: מיקום' onChange={(event) => {
-                            setCoordinates(event.target.value);
+                            dispatch(setCoordinates(event.target.value));
                     }}/>
                 </div>
             </div>

@@ -1,11 +1,14 @@
-import React, { useContext, useEffect } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React, { useEffect } from 'react';
 import { TbTrash } from "react-icons/tb";
 import { URL } from '../../utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { ridersListSelector } from '../../redux/selectors';
+import { setRidersList } from '../../redux/slices/eventsSlice';
 
 function RidersList({ booked, max, eventId}) {
 
-    const { ridersList, setRidersList, currentPage } = useContext(ridersAppContext);
+    const ridersList = useSelector(ridersListSelector);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetch(URL + 'participants_list', {
@@ -19,7 +22,7 @@ function RidersList({ booked, max, eventId}) {
         })
         .then(response => response.json())
         .then(data => {
-                setRidersList(data);
+                dispatch(setRidersList(data));
                 console.log(data);
         });
     }, []);

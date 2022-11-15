@@ -1,26 +1,26 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { TbCaravan } from "react-icons/tb";
 import { aboutEvent, timeToRender } from '../../utils/constants';
-import { ridersAppContext } from "../../utils/context";
 import NumberOfSeats from '../eventsComponents/NumberOfSeats';
 import PlaceAndTime from '../eventsComponents/PlaceAndTime';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userAdminSelector } from '../../redux/selectors';
+import { setCurrentEvent } from '../../redux/slices/eventsSlice';
+import { setCurrentPage } from '../../redux/slices/pageSlice';
 
 function EventElement({ event, page }) {
-
-    const { setCurrentEvent, setCurrentPage } = useContext(ridersAppContext);
     
     const vacancy = event.max_participants - event.booked;
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const admin = useSelector(userAdminSelector);
 
     return(
         <div className='container backgroundElement my-1 p-2 cursor' onClick={() => {
             if(event.is_private === 0 || admin === 1){
-                setCurrentEvent(event.event_id);
-                setCurrentPage(page);
+                dispatch(setCurrentEvent(event.event_id));
+                dispatch(setCurrentPage(page));
                 navigate(`/${aboutEvent}/${event.event_id}`);
             }
         }}>

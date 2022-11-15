@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React from 'react';
 import { joinSuccessDate } from '../../utils/constants';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import { useSelector } from 'react-redux';
-import { eventsListSelector } from '../../redux/selectors';
+import { currentEventSelector, eventsListSelector } from '../../redux/selectors';
 
 function AlreadyJoin() {
 
-    const { currentEvent } = useContext(ridersAppContext);
-
     const eventsList = useSelector(eventsListSelector);
+    const currentEvent = useSelector(currentEventSelector);
 
     const event = eventsList.find((value) => {
         return value.event_id === currentEvent

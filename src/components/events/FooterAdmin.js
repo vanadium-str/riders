@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { resetAll } from '../../redux/slices/eventsDataSlice';
-import { myEvents, myRuns } from '../../utils/constants';
+import { setCurrentPage } from '../../redux/slices/pageSlice';
+import { events, myEvents, myRuns } from '../../utils/constants';
 import { ridersAppContext } from '../../utils/context';
 
 function FooterAdmin() {
@@ -17,25 +18,28 @@ function FooterAdmin() {
                             ${currentBlock === 'allTrips' ? 'activeEventsSwitchButton' : ''}`}
                         onClick={() => {
                             dispatch(resetAll());
+                            dispatch(setCurrentPage(events));
                             setCurrentBlock('allTrips');
                             setPageEvent('');
                         }}>
                     כל הקפצות
                 </div>
                 <div className={`col-4 d-flex justify-content-center align-items-center
-                            ${currentBlock === 'myRuns' ? 'activeEventsSwitchButton': ''}`}
+                            ${currentBlock === myRuns ? 'activeEventsSwitchButton': ''}`}
                         onClick={() => {
                             dispatch(resetAll());
-                            setCurrentBlock('myRuns');
+                            dispatch(setCurrentPage(myRuns));
+                            setCurrentBlock(myRuns);
                             setPageEvent(myRuns);
                         }}>
                     נרשמתי
                 </div>
                 <div className={`col-4 d-flex justify-content-center align-items-center
-                            ${currentBlock === 'myEvents' ? 'activeEventsSwitchButton': ''}`}
+                            ${currentBlock === myEvents ? 'activeEventsSwitchButton': ''}`}
                         onClick={() => {
                             dispatch(resetAll());
-                            setCurrentBlock('myEvents');
+                            dispatch(setCurrentPage(myEvents));
+                            setCurrentBlock(myEvents);
                             setPageEvent(myEvents);
                         }}>
                     פתחתי

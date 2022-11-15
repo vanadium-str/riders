@@ -3,15 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
 import { allEvents, createEvent, events, myEvents, myRuns, personalArea } from '../../utils/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetAll } from '../../redux/slices/eventsDataSlice';
+import { currentPageSelector } from '../../redux/selectors';
 
 function HeaderEvent({ name, back, page }) {
 
-    const { setPageEvent, setCurrentBlock, currentPage } = useContext(ridersAppContext);
+    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const currentPage = useSelector(currentPageSelector);
 
     return (
         <div className='row'>
@@ -35,11 +38,11 @@ function HeaderEvent({ name, back, page }) {
                             if(currentPage === 'allEvents'){
                                 setCurrentBlock('allTrips');
                                 setPageEvent(allEvents);
-                            }else if(currentPage === 'myRuns'){
-                                setCurrentBlock('myRuns');
+                            }else if(currentPage === myRuns){
+                                setCurrentBlock(myRuns);
                                 setPageEvent(myRuns);
-                            }else if(currentPage === 'myEvents'){
-                                setCurrentBlock('myEvents');
+                            }else if(currentPage === myEvents){
+                                setCurrentBlock(myEvents);
                                 setPageEvent(myEvents);
                             }
                             navigate(`/${events}`);
@@ -51,7 +54,7 @@ function HeaderEvent({ name, back, page }) {
                             }else if(page === 'myTrips'){
                                 setCurrentBlock('myTrips');
                             }else{
-                                setCurrentBlock('myEvents');
+                                setCurrentBlock(myEvents);
                             }
                             dispatch(resetAll());
                             setPageEvent(page);

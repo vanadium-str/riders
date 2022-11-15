@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { dateFormatting, dateTorender, URL } from '../../utils/constants';
+import { dateFormatting, dateTorender, myRuns, URL } from '../../utils/constants';
 import EventElement from './EventElement';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ function MyRuns() {
     let dates = [];
     const dispatch = useDispatch();
     const userId = useSelector(userIdSelector);
-    const myRuns = useSelector(myRunsSelector);
+    const myRunsArray = useSelector(myRunsSelector);
 
     useEffect(() => {
         setLoading(true);
@@ -52,7 +52,7 @@ function MyRuns() {
             : <></>}
             
             <div className='row-reverse'>
-                {myRuns.length ?
+                {myRunsArray.length ?
 
                 uniqueDates.map((item, key) => {
                     function filter (data){
@@ -63,7 +63,7 @@ function MyRuns() {
                             return false;
                         }
                     }
-                    let sortedEvents = myRuns.filter(filter);
+                    let sortedEvents = myRunsArray.filter(filter);
                     return(
                         <div key={key}>
                             <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
@@ -71,7 +71,7 @@ function MyRuns() {
                             </div>
                             {sortedEvents.map((event, key) => {
                                 return(
-                                    <EventElement event={event} page={'myRuns'} key={key}/>
+                                    <EventElement event={event} page={myRuns} key={key}/>
                                 )
                             })}
                         </div>

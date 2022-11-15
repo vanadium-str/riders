@@ -1,17 +1,20 @@
-import React, { useContext } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { trackLevelSelector } from '../../redux/selectors';
+import { setTrackLevel } from '../../redux/slices/eventsDataSlice';
 
 function Tracks({ empty }) {
 
-    const { trackLevel, setTrackLevel } = useContext(ridersAppContext);
+    const trackLevel = useSelector(trackLevelSelector);
+    const dispatch = useDispatch();
   
     const checkArray = (id) => {
         if(trackLevel.includes(id)){
             let index = trackLevel.indexOf(id);
             trackLevel.splice(index, 1);
-            setTrackLevel([...trackLevel]);       
+            dispatch(setTrackLevel([...trackLevel]));    
         }else{
-            setTrackLevel([...trackLevel, id]);
+            dispatch(setTrackLevel([...trackLevel, id]));
         }
     }
 

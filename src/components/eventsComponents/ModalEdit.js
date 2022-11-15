@@ -4,15 +4,16 @@ import { ridersAppContext } from '../../utils/context';
 import { errorPage, myEvents, URL  } from '../../utils/constants';
 import InputEventSmall from './InputEventSmall';
 import { useSelector } from 'react-redux';
-import { dateEndSelector, dateSelector } from '../../redux/selectors';
+import { currentEventSelector, dateEndSelector, dateSelector } from '../../redux/selectors';
 
 function ModalEdit({ active, setActive }) {
 
-    const { currentEvent, setPageEvent } = useContext(ridersAppContext);
+    const { setPageEvent } = useContext(ridersAppContext);
 
     const navigate = useNavigate();
     const date = useSelector(dateSelector);
     const dateEnd = useSelector(dateEndSelector);
+    const currentEvent = useSelector(currentEventSelector);
 
     const editTime = () => {
         fetch(URL + 'time_update',{

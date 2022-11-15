@@ -15,7 +15,7 @@ function UnsubscribeSuccess() {
                 בוטל בהצלחה
             </div>
             <button className='button' onClick={() => {
-                setCurrentBlock('myRuns');
+                setCurrentBlock(myRuns);
                 setPageEvent(myRuns);
                 navigate(`/${events}`);
             }}>

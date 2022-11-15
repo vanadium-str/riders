@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dateSelector, eventsListSelector } from '../../redux/selectors';
-import { setDate, setDateEnd } from '../../redux/slices/eventsDataSlice';
-import { ridersAppContext } from '../../utils/context';
+import { currentEventSelector, dateSelector, eventsListSelector } from '../../redux/selectors';
+import { setDate, setDateEnd, setMaxPlaces, setMinPlaces } from '../../redux/slices/eventsDataSlice';
 
 function InputEventSmall({ type, name, explanation, content, empty }) {
-
-    const { setMaxPlaces, setMinPlaces, currentEvent } = useContext(ridersAppContext);
 
     const dispatch = useDispatch();
     const eventsList = useSelector(eventsListSelector);
     const date = useSelector(dateSelector);
+    const currentEvent = useSelector(currentEventSelector);
     let eventCurrent = [];
     
     if(eventsList.lenght){
@@ -40,9 +38,9 @@ function InputEventSmall({ type, name, explanation, content, empty }) {
 
     const typeDefinition = (event) => {
         if(content === 'maximum'){
-            setMaxPlaces(event);
+            dispatch(setMaxPlaces(event));
         }else if(content === 'minimum'){
-            setMinPlaces(event);
+            dispatch(setMinPlaces(event));
         }else if(content === 'timeStart'){
             setTime(event, true);
         }else if(content === 'timeEnd'){

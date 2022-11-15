@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { ridersAppContext } from '../../utils/context';
 import { createSpot, myEvents, URL } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
 import InputEvent from '../eventsComponents/InputEvent';
@@ -8,17 +7,18 @@ import InputEventSmall from '../eventsComponents/InputEventSmall';
 import Privacy from '../eventsComponents/Privacy';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
-import { useSelector } from 'react-redux';
-import { dateSelector } from '../../redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { dateSelector, spotsListSelector } from '../../redux/selectors';
+import { setSpotsList } from '../../redux/slices/eventsDataSlice';
 
 function CreateEvent() {
-
-    const { spotsList, setSpotsList } = useContext(ridersAppContext);
 
     const [emptyField, setEmptyField] = useState('');
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const date = useSelector(dateSelector);
+    const spotsList = useSelector(spotsListSelector);
 
     const callbackWrongField = (field) => {
         setEmptyField(field);
@@ -29,7 +29,7 @@ function CreateEvent() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            setSpotsList(data);   
+            dispatch(setSpotsList(data));
         })
     }, []);
 

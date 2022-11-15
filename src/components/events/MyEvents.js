@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { myEventsSelector, userIdSelector } from '../../redux/selectors';
 import { setMyEvents } from '../../redux/slices/eventsSlice';
-import { createEvent, dateFormatting, dateTorender, URL } from '../../utils/constants';
+import { createEvent, dateFormatting, dateTorender, myEvents, URL } from '../../utils/constants';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import EventElement from './EventElement';
@@ -14,7 +14,7 @@ function MyEvents() {
     let dates = [];
     const dispatch = useDispatch();
     const userId = useSelector(userIdSelector);
-    const myEvents = useSelector(myEventsSelector);
+    const myEventsArray = useSelector(myEventsSelector);
 
     useEffect(() => {
         setLoading(true);
@@ -53,7 +53,7 @@ function MyEvents() {
             : <></>}
             
             <div className='row'>
-                {myEvents.length ?
+                {myEventsArray.length ?
 
                     uniqueDates.map((item, key) => {
                         function filter (data){
@@ -64,7 +64,7 @@ function MyEvents() {
                                 return false;
                             }
                         }
-                        let sortedEvents = myEvents.filter(filter);
+                        let sortedEvents = myEventsArray.filter(filter);
                         return(
                             <div key={key}>
                                 <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
@@ -72,7 +72,7 @@ function MyEvents() {
                                 </div>
                                 {sortedEvents.map((event, key) => {
                                     return(
-                                        <EventElement event={event} page={'myEvents'} key={key}/>
+                                        <EventElement event={event} page={myEvents} key={key}/>
                                     )
                                 })}
                             </div>

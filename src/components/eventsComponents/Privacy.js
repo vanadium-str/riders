@@ -1,17 +1,16 @@
-import React, { useContext, useState } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setPrivacy } from '../../redux/slices/eventsDataSlice';
 
 function Privacy() {
-
-    const { setPrivacy } = useContext(ridersAppContext);
-
     const [bottom, setBottom] = useState(false);
+    const dispatch = useDispatch();
 
     return (
         <div className='d-flex flex-column align-items-center cursor mb-7'>
             <div className={`inputSize chooseTopBlock p-2 text-end ${bottom ? 'colorGrey' : 'backgroundBlue'}`} onClick={() => {
                 setBottom(false);
-                setPrivacy(0);
+                dispatch(setPrivacy(0));
             }}>
                 <div className='fw-bold'>
                     הקפצה ציבורי
@@ -22,7 +21,7 @@ function Privacy() {
             </div>
             <div className={`inputSize chooseBottomBlock p-2 text-end ${bottom ? 'backgroundBlue' : 'colorGrey'}`} onClick={() => {
                 setBottom(true);
-                setPrivacy(1);
+                dispatch(setPrivacy(1));
             }}>
                 <div className='fw-bold'>
                     הקפצה פרטי
