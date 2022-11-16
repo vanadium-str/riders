@@ -11,8 +11,9 @@ function Tracks({ empty }) {
     const checkArray = (id) => {
         if(trackLevel.includes(id)){
             let index = trackLevel.indexOf(id);
-            trackLevel.splice(index, 1);
-            dispatch(setTrackLevel([...trackLevel]));    
+            let array = trackLevel.slice(0);
+            array.splice(index, 1);
+            dispatch(setTrackLevel([...array]));    
         }else{
             dispatch(setTrackLevel([...trackLevel, id]));
         }

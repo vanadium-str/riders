@@ -54,7 +54,7 @@ function AllEvents() {
                     }
                     let sortedEvents = eventsList.filter(filter);
                     return(
-                        <div>
+                        <div key={key}>
                             <div className='col-12 rtl mt-4 mb-1 px-2 d-flex justify-content-start'>
                                 {dateTorender(item)}
                             </div>
