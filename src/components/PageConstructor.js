@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
-import { ridersAppContext } from '../utils/context';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { currentPageSelector } from '../redux/selectors';
 import { myEvents, myRuns } from '../utils/constants';
 import AllEvents from './events/AllEvents';
 import MyEvents from './events/MyEvents';
@@ -7,9 +8,9 @@ import MyRuns from './events/MyRuns';
 
 function PageConstructor() {
 
-    const { pageEvent } = useContext(ridersAppContext);
+    const currentPage = useSelector(currentPageSelector);
 
-    switch (pageEvent) {
+    switch (currentPage) {
         case myEvents:
             return(
                 <MyEvents/>

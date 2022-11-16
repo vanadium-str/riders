@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { registration } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import InputSignIn from '../fieldsLogin/InputSignIn';
 import Button from '../fieldsLogin/Button';
 import SocialMedia from './SocialMedia';
 import Header from './Header';
+import { useDispatch } from 'react-redux';
+import { setPass } from '../../redux/slices/userSlice';
 
 function StartPage() {
 
-    const { setPass } = useContext(ridersAppContext);
+    const dispatch = useDispatch();
 
     const [wrongMail, setWrongMail] = useState(false);
     const [wrongPass, setWrongPass] = useState(false);
@@ -32,7 +33,7 @@ function StartPage() {
             <Header name={'כניסה'} back={false}/>
             <div className='text-end mt-3 me-4 textLarge'>
                 <Link to={`/${registration}`} className='colorBlue cursor' onClick={() => {
-                    setPass('');
+                    dispatch(setPass(''));
                 }}>
                     להרשמה
                 </Link>

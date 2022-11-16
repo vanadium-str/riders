@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { ridersAppContext } from '../../utils/context';
 import { errorPage, myEvents, URL  } from '../../utils/constants';
 import InputEventSmall from './InputEventSmall';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { currentEventSelector, dateEndSelector, dateSelector } from '../../redux/selectors';
+import { setCurrentPage } from '../../redux/slices/pageSlice';
 
 function ModalEdit({ active, setActive }) {
 
-    const { setPageEvent } = useContext(ridersAppContext);
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const date = useSelector(dateSelector);
     const dateEnd = useSelector(dateEndSelector);
     const currentEvent = useSelector(currentEventSelector);
@@ -31,7 +31,7 @@ function ModalEdit({ active, setActive }) {
         .then(data => {
             if(data.status === 0){
                 setActive(false);
-                setPageEvent(myEvents);
+                dispatch(setCurrentPage(myEvents));
             }else if(data.status === 1){
                 console.error('Data Base error');
                 setActive(false);

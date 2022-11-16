@@ -1,16 +1,15 @@
-import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { currentEventSelector, eventsListSelector } from '../../redux/selectors';
+import { setCurrentPage } from '../../redux/slices/pageSlice';
 import { events } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 
 function JoinFailure() {
 
-    const { setPageEvent } = useContext(ridersAppContext);
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const eventsList = useSelector(eventsListSelector);
     const currentEvent = useSelector(currentEventSelector);
 
@@ -41,7 +40,7 @@ function JoinFailure() {
                 <ButtonEvents name={'להירשם להמתנה'} event={'joinWaiting'}/>
                 <div className='col-12 d-flex justify-content-center colorBlue cursor bottom'
                     onClick={() => {
-                        setPageEvent('');
+                        dispatch(setCurrentPage(events));
                         navigate(`/${events}`);
                     }}>
                     לבטל

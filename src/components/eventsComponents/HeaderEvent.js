@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { ridersAppContext } from '../../utils/context';
 import arrow from '../../images/Arrow.jpg';
-import { allEvents, createEvent, events, myEvents, myRuns, personalArea } from '../../utils/constants';
+import { aboutEvent, createEvent, events, myEvents, myRuns, personalArea } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetAll } from '../../redux/slices/eventsDataSlice';
 import { currentPageSelector } from '../../redux/selectors';
+import { setCurrentPage } from '../../redux/slices/pageSlice';
 
 function HeaderEvent({ name, back, page }) {
-
-    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,30 +32,27 @@ function HeaderEvent({ name, back, page }) {
             <div className={`${back ? 'col-12 mediumTitle mb-5 mt-2' : 'col-8 pageTitle'}`}>
                 {name} {back ? <img src={arrow} className='cursor' onClick={() => {
 
-                        if(page === 'aboutTrip'){
-                            if(currentPage === 'allEvents'){
-                                setCurrentBlock('allTrips');
-                                setPageEvent(allEvents);
+                        if(page === aboutEvent){
+                            if(currentPage === events){
+                                dispatch(setCurrentPage(events));
                             }else if(currentPage === myRuns){
-                                setCurrentBlock(myRuns);
-                                setPageEvent(myRuns);
+                                dispatch(setCurrentPage(myRuns));
                             }else if(currentPage === myEvents){
-                                setCurrentBlock(myEvents);
-                                setPageEvent(myEvents);
+                                dispatch(setCurrentPage(myEvents));
                             }
                             navigate(`/${events}`);
-                        }else if(page === 'createEvent'){
+                        }else if(page === createEvent){
                             navigate(`/${createEvent}`);
                         }else{
-                            if(page === 'events'){
-                                setCurrentBlock('allTrips');
-                            }else if(page === 'myTrips'){
-                                setCurrentBlock('myTrips');
+                            if(page === events){
+                                dispatch(setCurrentPage(events));
+                            }else if(page === myRuns){
+                                dispatch(setCurrentPage(myRuns));
                             }else{
-                                setCurrentBlock(myEvents);
+                                dispatch(setCurrentPage(myEvents));
                             }
                             dispatch(resetAll());
-                            setPageEvent(page);
+                            dispatch(setCurrentPage(page));
                         }
                         
                     }}/>

@@ -1,46 +1,39 @@
-import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentPageSelector } from '../../redux/selectors';
 import { resetAll } from '../../redux/slices/eventsDataSlice';
 import { setCurrentPage } from '../../redux/slices/pageSlice';
 import { events, myEvents, myRuns } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 
 function FooterAdmin() {
 
-    const { currentBlock, setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
-
     const dispatch = useDispatch();
+    const currentPage = useSelector(currentPageSelector);
 
     return(
         <div className='container-fluid eventsSwitch'>
             <div className='row text-center'>
                 <div className={`col-4 d-flex justify-content-center align-items-center
-                            ${currentBlock === 'allTrips' ? 'activeEventsSwitchButton' : ''}`}
+                            ${currentPage === events ? 'activeEventsSwitchButton' : ''}`}
                         onClick={() => {
                             dispatch(resetAll());
                             dispatch(setCurrentPage(events));
-                            setCurrentBlock('allTrips');
-                            setPageEvent('');
                         }}>
                     כל הקפצות
                 </div>
                 <div className={`col-4 d-flex justify-content-center align-items-center
-                            ${currentBlock === myRuns ? 'activeEventsSwitchButton': ''}`}
+                            ${currentPage === myRuns ? 'activeEventsSwitchButton': ''}`}
                         onClick={() => {
                             dispatch(resetAll());
                             dispatch(setCurrentPage(myRuns));
-                            setCurrentBlock(myRuns);
-                            setPageEvent(myRuns);
                         }}>
                     נרשמתי
                 </div>
                 <div className={`col-4 d-flex justify-content-center align-items-center
-                            ${currentBlock === myEvents ? 'activeEventsSwitchButton': ''}`}
+                            ${currentPage === myEvents ? 'activeEventsSwitchButton': ''}`}
                         onClick={() => {
                             dispatch(resetAll());
                             dispatch(setCurrentPage(myEvents));
-                            setCurrentBlock(myEvents);
-                            setPageEvent(myEvents);
                         }}>
                     פתחתי
                 </div>

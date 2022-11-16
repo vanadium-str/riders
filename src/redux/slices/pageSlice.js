@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import { events } from "../../utils/constants"
 
 const initialState = {
-    currentPage: 'myEvents'
+    currentPage: events
 }
 
 export const pageSlice = createSlice({

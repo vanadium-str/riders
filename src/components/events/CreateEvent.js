@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { createSpot, myEvents, URL } from '../../utils/constants';
+import { aboutEvent, createSpot, myEvents, URL } from '../../utils/constants';
 import Location from '../eventsComponents/Location';
 import InputEvent from '../eventsComponents/InputEvent';
 import InputEventSmall from '../eventsComponents/InputEventSmall';
@@ -35,7 +35,7 @@ function CreateEvent() {
 
     return (
         <div className='container py-3 minHeight'>
-            <HeaderEvent name={'לפתוח הקפצה'} back={true} page={'aboutTrip'}/>
+            <HeaderEvent name={'לפתוח הקפצה'} back={true} page={aboutEvent}/>
             <div className='row ms-1 mb-3'>
                 <div className='col-6 colorBlue cursor' onClick={() => navigate(`/${createSpot}`)}>
                     להוסיף יעד

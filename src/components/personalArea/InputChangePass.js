@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { ridersAppContext } from '../../utils/context';
+import React, { useState } from 'react';
 import InputMessage from '../fieldsLogin/InputMessage';
 
 function InputChangePass({ name, content, callbackSetPass, wrong, wrongMessage }) {

@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { setCurrentPage } from '../../redux/slices/pageSlice';
 import { events, myRuns } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 
 function UnsubscribeSuccess() {
 
-    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     return (
         <div className='d-flex flex-column justify-content-center align-items-center minHeight'>
@@ -15,8 +15,7 @@ function UnsubscribeSuccess() {
                 בוטל בהצלחה
             </div>
             <button className='button' onClick={() => {
-                setCurrentBlock(myRuns);
-                setPageEvent(myRuns);
+                dispatch(setCurrentPage(myRuns));
                 navigate(`/${events}`);
             }}>
                 הקפצות שלי

@@ -2,7 +2,6 @@ export const events = 'events';
 export const registration = 'registration';
 export const myEvents = 'myEvents';
 export const myRuns = 'myRuns';
-export const allEvents = 'allEvents';
 export const createEvent = 'createEvent';
 export const createSpot = 'createSpot';
 export const aboutEvent = 'aboutEvent';

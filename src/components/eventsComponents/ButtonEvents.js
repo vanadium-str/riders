@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import {
@@ -28,17 +28,13 @@ import {
     errorPage,
     createEvent,
     URL,
-    allEvents,
     myEvents
 } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 import ModalEdit from '../eventsComponents/ModalEdit';
 import ModalDeleteEvent from './ModalDeleteEvent';
 import ModalUnsubscribe from './ModalUnsubscribe';
 
 function ButtonEvents({ name, event, page, callbackWrongField }) {
-
-    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
 
     const [activeModalEdit, setActiveModalEdit] = useState(false);
     const [activeModalUnsubscribe, setActiveModalUnsubscribe] = useState(false);
@@ -61,8 +57,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
     const dispatch = useDispatch();
 
     const eventsPage = () => {
-        setCurrentBlock(myRuns);
-        setPageEvent(myRuns);
+        dispatch(setCurrentPage(myRuns));
         navigate(`/${events}`);
     };
 
@@ -107,8 +102,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                 }else{
                     console.log(data);
                     dispatch(resetAll());
-                    setCurrentBlock('allTrips');
-                    setPageEvent(allEvents);
+                    dispatch(setCurrentPage(events));
                     navigate(`/${events}`);
                 }
             })
@@ -225,7 +219,7 @@ function ButtonEvents({ name, event, page, callbackWrongField }) {
                     dispatch(setCurrentPage(myEvents));
                     navigate(`/${createEvent}`);
                 }else{
-                    setPageEvent(page);
+                    dispatch(setCurrentPage(page));
                 }
             }}>
                 {name}

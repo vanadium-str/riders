@@ -5,7 +5,7 @@ import AboutEventBlock from '../eventsComponents/AboutEventBlock';
 import { TbCaravan, TbCheck, TbTrash } from "react-icons/tb";
 import ButtonEvents from '../eventsComponents/ButtonEvents';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
-import { dateFormatting, dateTorender, events, myEvents, myRuns, timeToRender } from '../../utils/constants';
+import { aboutEvent, dateFormatting, dateTorender, events, myEvents, myRuns, timeToRender } from '../../utils/constants';
 import RidersList from '../eventsComponents/RidersList';
 import ModalDeleteEvent from '../eventsComponents/ModalDeleteEvent';
 import { useSelector } from 'react-redux';
@@ -51,7 +51,7 @@ function AboutEvent() {
         event.levels ?
 
             <div className='container pe-3 minHeight position-relative'>
-                <HeaderEvent name={event.spot} back={true} page={'aboutTrip'}/>
+                <HeaderEvent name={event.spot} back={true} page={aboutEvent}/>
                 <div className='row text-end fontSizeMedium'>
                     <div className='col-6'>
                         <div className='colorGrey smallText'>
@@ -92,7 +92,7 @@ function AboutEvent() {
                             max={event.max_participants} eventId={event.event_id}/>
                     : <></>}
                     
-                    {currentPage === 'allEvents' ? <ButtonEvents name={'הזמן'} event={'join'}/>
+                    {currentPage === events ? <ButtonEvents name={'הזמן'} event={'join'}/>
                     : currentPage === myRuns 
                         ? <ButtonEvents name={'בטל'} event={'unsubscribe'}/> 
                         : 

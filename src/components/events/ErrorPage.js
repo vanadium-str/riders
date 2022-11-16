@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { setCurrentPage } from '../../redux/slices/pageSlice';
 import { events } from '../../utils/constants';
-import { ridersAppContext } from '../../utils/context';
 
 function ErrorPage() {
 
-    const { setPageEvent, setCurrentBlock } = useContext(ridersAppContext);
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     return (
         <div className='container'>
@@ -22,8 +22,7 @@ function ErrorPage() {
                     Something went wrong 😢
                 </div>
                 <button className='buttonSmall mt-5' onClick={() => {
-                    setCurrentBlock('allTrips');
-                    setPageEvent('');
+                    dispatch(setCurrentPage(events));
                     navigate(`/${events}`);
                 }}>
                     חזור

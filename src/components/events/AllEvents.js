@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { dateFormatting, dateTorender, URL } from '../../utils/constants';
+import { dateFormatting, dateTorender, events, URL } from '../../utils/constants';
 import EventElement from './EventElement';
 import HeaderEvent from '../eventsComponents/HeaderEvent';
 import { useDispatch, useSelector } from 'react-redux';
@@ -60,7 +60,7 @@ function AllEvents() {
                             </div>
                             {sortedEvents.map((event, key) => {
                                 return(
-                                    <EventElement event={event} page={'allEvents'} key={key}/>
+                                    <EventElement event={event} page={events} key={key}/>
                                 )
                             })}
                         </div>
